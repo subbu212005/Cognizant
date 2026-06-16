@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Hub - Local Event Portal</title>
+    
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Internal CSS for Task 3: Welcome Banner Styling -->
+    <style>
+        #welcomeBanner {
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            color: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 20px 0 40px 0;
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        #welcomeBanner h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        #welcomeBanner p {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+        .special-offer-span {
+            color: #ff4d4d;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Section -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-dot"></span> CommunityHub
+            </div>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#events">Events</a>
+                <a href="#register">Register</a>
+                <a href="#location">Find Us</a>
+                <a href="#video-promo">Promo</a>
+                <a href="help.html" target="_blank" class="help-link">Help & Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="main-content">
+        
+        <!-- Home Section -->
+        <section id="home" class="hero-section">
+            <div id="welcomeBanner">
+                <h2>Welcome back, Citizen!</h2>
+                <p>Stay engaged with your local city council. Discover upcoming events, register instantly, and help build a stronger, more connected community.</p>
+                <!-- Task 3: Inline style for special offer span -->
+                <span style="color: #ef4444; font-weight: bold; background: rgba(255, 255, 255, 0.9); padding: 6px 12px; border-radius: 8px; display: inline-block; margin-top: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);" class="special-offer">
+                    ★ SPECIAL OFFER: Register for any event today and get a free community pool day pass!
+                </span>
+            </div>
+
+            <div class="hero-intro">
+                <h1>Active Civic Life Starts Here</h1>
+                <p class="highlight">Connecting residents with green initiatives, festivals, educational workshops, and arts programs hosted by the City Council.</p>
+            </div>
+        </section>
+
+        <!-- Events Section & Image Gallery -->
+        <section id="events" class="events-section">
+            <div class="section-header">
+                <h2>Past Event Gallery</h2>
+                <p>Relive moments from our community's favorite recent gatherings. Double-click any photo to enlarge.</p>
+            </div>
+
+            <!-- Task 4: Image Gallery Table Layout (2 rows, 3 columns) -->
+            <table class="gallery-table">
+                <caption>Highlights of Recent Local Events</caption>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="gallery-card">
+                                <img src="images/park_cleanup.png" alt="Community Park Cleanup" title="Volunteers planting trees" class="gallery-img" ondblclick="enlargeImage(this)">
+                                <p class="event-caption">Park Cleanup & Greening</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="gallery-card">
+                                <img src="images/food_festival.png" alt="Local Food Festival" title="A gathering of food trucks and stalls" class="gallery-img" ondblclick="enlargeImage(this)">
+                                <p class="event-caption">Culinary Food Festival</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="gallery-card">
+                                <img src="images/marathon.png" alt="Charity Marathon" title="Runners crossing the finish line" class="gallery-img" ondblclick="enlargeImage(this)">
+                                <p class="event-caption">Annual Charity Marathon</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="gallery-card">
+                                <img src="images/art_expo.png" alt="Art & Craft Exhibition" title="Craft displays and pottery" class="gallery-img" ondblclick="enlargeImage(this)">
+                                <p class="event-caption">Local Art Exhibition</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="gallery-card">
+                                <img src="images/music_concert.png" alt="Music in the Park" title="Band performing under string lights" class="gallery-img" ondblclick="enlargeImage(this)">
+                                <p class="event-caption">Acoustic Sunset Concert</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="gallery-card">
+                                <img src="images/science_fair.png" alt="Outdoor Science Fair" title="Students showcasing science projects" class="gallery-img" ondblclick="enlargeImage(this)">
+                                <p class="event-caption">Youth Science & Tech Fair</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Registration Form Section -->
+        <section id="register" class="register-section">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Event Registration</h2>
+                    <p>Secure your spot in upcoming community activities. Fields marked * are required.</p>
+                </div>
+
+                <form id="eventForm" novalidate>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="userName">Full Name *</label>
+                            <input type="text" id="userName" placeholder="John Doe" required autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userEmail">Email Address *</label>
+                            <input type="email" id="userEmail" placeholder="john.doe@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userPhone">Phone Number *</label>
+                            <!-- Task 6: onblur phone validation -->
+                            <input type="tel" id="userPhone" placeholder="123-456-7890" required onblur="validatePhone()">
+                            <span id="phoneError" class="field-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventDate">Preferred Date *</label>
+                            <input type="date" id="eventDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventType">Event Type *</label>
+                            <!-- Task 6: onchange event fee handler & Task 8: LocalStorage save -->
+                            <select id="eventType" required onchange="handleEventChange(this.value)">
+                                <option value="" disabled selected>Select an Event</option>
+                                <option value="cleanup">Community Park Cleanup ($0)</option>
+                                <option value="food">Local Food Festival ($15)</option>
+                                <option value="marathon">Charity Marathon ($25)</option>
+                                <option value="art">Art & Craft Exhibition ($10)</option>
+                                <option value="music">Music in the Park ($20)</option>
+                                <option value="science">Outdoor Science Fair ($5)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Registration Fee</label>
+                            <div class="fee-display" id="feeDisplay">Select an event type to view fee</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="eventDescription">Feedback / Message *</label>
+                        <!-- Task 6: Capture key events and count characters -->
+                        <textarea id="eventDescription" placeholder="Tell us why you want to join or list any dietary/accessibility requirements..." rows="4" required></textarea>
+                        <div class="char-count-wrapper">
+                            <span id="charCount">0</span> characters typed
+                        </div>
+                    </div>
+
+                    <div class="preferences-actions">
+                        <button type="button" id="clearPrefBtn" class="btn btn-secondary">Clear Preferences</button>
+                    </div>
+
+                    <!-- Task 6: onclick on submit button to show confirmation -->
+                    <button type="submit" id="submitBtn" class="btn btn-primary" onclick="confirmSubmit(event)">Register Now</button>
+
+                    <!-- Task 5: Display confirmation message using <output> -->
+                    <div class="output-container">
+                        <output id="formOutput" class="form-output"></output>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Video Invite Section -->
+        <section id="video-promo" class="video-section">
+            <div class="section-header">
+                <h2>Event Invitation Promo & Activities</h2>
+                <p>Check out the official invitation details overlaid directly on top of our promo video preview.</p>
+            </div>
+            
+            <!-- Video background container -->
+            <div class="video-promo-container">
+                <!-- Task 7: Video with source, controls and oncanplay event -->
+                <video id="promoVideo" controls autoplay muted loop oncanplay="handleVideoCanPlay()">
+                    <source src="promo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                
+                <!-- Status watermark in corner -->
+                <div id="videoStatus" class="video-status">Loading video...</div>
+
+                <!-- Invitation Card Overlay -->
+                <div class="invitation-overlay-card">
+                    <div class="card-badge">OFFICIAL INVITATION</div>
+                    <h3 class="card-title">Community Carnival & Engagement Day</h3>
+                    <p class="card-subtitle">Hosted by the Local City Council</p>
+                    
+                    <div class="card-divider"></div>
+                    
+                    <h4 class="activities-heading">Featured Activities:</h4>
+                    <ul class="activities-list">
+                        <li>
+                            <span class="activity-icon">🌳</span>
+                            <div>
+                                <strong>Park Greening & Cleanup</strong>
+                                <p>Volunteer planting & park restoration.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="activity-icon">🍔</span>
+                            <div>
+                                <strong>Local Food & Craft Fair</strong>
+                                <p>Support local food trucks and artisan vendors.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="activity-icon">🏃‍♂️</span>
+                            <div>
+                                <strong>Annual Charity 5K Marathon</strong>
+                                <p>Run/walk to support community library funds.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="activity-icon">🔬</span>
+                            <div>
+                                <strong>Science & Art Exposition</strong>
+                                <p>Browse youth inventions and paintings.</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="card-footer-info">
+                        <div class="info-item">
+                            <span>📅 Date:</span> <strong>July 15, 2026</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>📍 Venue:</span> <strong>Central Park Council Grounds</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geolocation Section -->
+        <section id="location" class="location-section">
+            <div class="location-card">
+                <h2>Find Closest Event Venue</h2>
+                <p>Allow access to your device's location to check which neighborhood facility is nearest to you.</p>
+                <!-- Task 9: Geolocation on click -->
+                <button id="findNearbyBtn" onclick="findLocation()" class="btn btn-primary">Find Nearby Events</button>
+                <div id="locationOutput" class="location-output"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Local City Council. All rights reserved. <span class="highlight">Empowering Community Growth.</span></p>
+            <p class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#events">Events</a>
+                <a href="#register">Register</a>
+                <a href="help.html" target="_blank">Help Center</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Image Modal for Double Click Enlarge Feature -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="modalImg" alt="Enlarged gallery view">
+        <div id="modalCaption"></div>
+    </div>
+
+    <!-- External Javascript -->
+    <script src="script.js"></script>
+</body>
+</html>
