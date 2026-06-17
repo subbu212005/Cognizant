@@ -43,11 +43,16 @@ In this example, the Book class is responsible only for storing book information
 - Improved readability
 
 ## Real World Example
-A restaurant waiter takes orders.
 
-The waiter should not cook food and manage accounting at the same time.
+In a college management system:
 
-Each role has a single responsibility.
+- Student class → Stores student information.
+- GradeCalculator class → Calculates student grades.
+- StudentRepository class → Saves and retrieves student data from the database.
+
+Each class has a single responsibility. If the grading logic changes, only the GradeCalculator class needs to be modified. If the database changes, only the StudentRepository class needs to be updated.
+
+This follows the Single Responsibility Principle (SRP).
 
 ## Conclusion
 The Single Responsibility Principle helps developers create clean, maintainable, and scalable applications by ensuring that each class focuses on only one responsibility.
