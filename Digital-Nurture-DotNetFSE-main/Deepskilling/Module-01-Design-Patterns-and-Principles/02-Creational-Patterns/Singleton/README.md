@@ -35,7 +35,12 @@ Multiple spooler instances could create conflicts.
 
 Therefore, only one spooler object is maintained.
 
+## Program Output
 
+```text
+Singleton Instance Created
+True
+```
 
 ## Conclusion
 
