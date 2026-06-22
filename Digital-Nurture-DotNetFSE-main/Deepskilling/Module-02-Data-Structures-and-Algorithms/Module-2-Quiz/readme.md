@@ -41,7 +41,8 @@ Based on the results, I identified areas that require further practice and revis
 
 ## Proof
 
-Quiz Result Screenshot: `quiz.png`
+Quiz Result Screenshot: <img width="1740" height="904" alt="quiz" src="https://github.com/user-attachments/assets/a21b3070-bb2a-4748-b603-5135f2583d3a" />
+
 
 ## Conclusion
 
