@@ -1,19 +1,12 @@
-# Module 03 - SQL Advanced Concepts
+# Advanced Concepts
 
-## Overview
+## Introduction
 
-This module focuses on advanced SQL Server concepts used for data analysis, reporting, and database management.
+Advanced SQL concepts help developers perform complex data analysis, reporting, and database management tasks efficiently.
 
-It covers SQL Server architecture, window functions, Common Table Expressions (CTE), grouping operations, MERGE statements, and data transformation techniques such as PIVOT and UNPIVOT.
+These features provide powerful mechanisms for ranking, grouping, transforming, and manipulating data in SQL Server.
 
 ## Topics Covered
-
-### SQL Server Basics
-
-* Introduction to SQL Server
-* SQL Server Editions
-* SQL Server Instances
-* SQL Server Management Studio (SSMS)
 
 ### Window Functions
 
@@ -23,16 +16,16 @@ It covers SQL Server architecture, window functions, Common Table Expressions (C
 * RANK()
 * DENSE_RANK()
 
-### Grouping Operations
+### Advanced Grouping Operations
 
 * GROUPING SETS
 * CUBE
 * ROLLUP
 
-### Common Table Expressions
+### Common Table Expressions (CTE)
 
 * WITH Statement
-* CTE
+* Common Table Expression (CTE)
 * Recursive CTE
 
 ### Data Manipulation
@@ -44,20 +37,26 @@ It covers SQL Server architecture, window functions, Common Table Expressions (C
 * PIVOT
 * UNPIVOT
 
-## Learning Objectives
+## Files Included
 
-* Understand SQL Server architecture and tools.
-* Use window functions for advanced reporting.
-* Apply grouping operations for data aggregation.
-* Implement Common Table Expressions.
-* Perform data merging operations.
-* Transform data using PIVOT and UNPIVOT.
+| File Name           | Topic                        |
+| ------------------- | ---------------------------- |
+| OverClause.sql      | OVER() Clause                |
+| PartitionBy.sql     | PARTITION BY                 |
+| WindowFunctions.sql | ROW_NUMBER, RANK, DENSE_RANK |
+| GroupingSets.sql    | GROUPING SETS                |
+| Cube.sql            | CUBE                         |
+| Rollup.sql          | ROLLUP                       |
+| CTE.sql             | Common Table Expression      |
+| RecursiveCTE.sql    | Recursive CTE                |
+| Merge.sql           | MERGE Statement              |
+| Pivot.sql           | PIVOT                        |
+| Unpivot.sql         | UNPIVOT                      |
 
 ## Learning Outcome
 
-After completing this module, I gained practical knowledge of advanced SQL features used for data analysis, reporting, and database management.
+After completing this topic, I understood advanced SQL querying techniques, window functions, grouping operations, common table expressions, data transformation, and data manipulation features in SQL Server.
 
 ## Conclusion
 
-Advanced SQL concepts improve query performance, simplify complex data analysis tasks, and support enterprise-level database applications.
-
+Advanced SQL concepts improve query efficiency, simplify reporting requirements, and support enterprise-level database solutions.
