@@ -15,9 +15,9 @@ This quiz was completed as part of **Cognizant Deep Skilling Module 2 - Data Str
 
 ## Result Summary
 
-* Score: 50/100
-* Correct Answers: 8
-* Incorrect Answers: 8
+* Score: 65/100
+* Correct Answers: 13
+* Incorrect Answers: 3
 
 ## Learning Reflection
 
