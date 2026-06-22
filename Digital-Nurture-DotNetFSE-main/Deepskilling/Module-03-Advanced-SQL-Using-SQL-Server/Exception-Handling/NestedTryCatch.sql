@@ -1,0 +1,15 @@
+BEGIN TRY
+
+    BEGIN TRY
+        DECLARE @Value INT=10/0;
+    END TRY
+
+    BEGIN CATCH
+        PRINT 'Inner TRY-CATCH Executed';
+    END CATCH
+
+END TRY
+
+BEGIN CATCH
+    PRINT 'Outer TRY-CATCH Executed';
+END CATCH;
