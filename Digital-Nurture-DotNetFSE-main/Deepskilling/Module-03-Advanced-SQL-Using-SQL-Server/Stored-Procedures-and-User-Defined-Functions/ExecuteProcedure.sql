@@ -1,0 +1,1 @@
+EXEC GetStudentById 101;
