@@ -1,0 +1,15 @@
+BEGIN TRANSACTION;
+
+UPDATE Students
+SET Marks=Marks+5
+WHERE StudentID=1;
+
+SAVE TRANSACTION MarksUpdated;
+
+UPDATE Students
+SET Marks=Marks+10
+WHERE StudentID=1;
+
+ROLLBACK TRANSACTION MarksUpdated;
+
+COMMIT;
