@@ -1,0 +1,7 @@
+CREATE TRIGGER trg_LogonAudit
+ON ALL SERVER
+FOR LOGON
+AS
+BEGIN
+    PRINT 'User Logged In';
+END;
