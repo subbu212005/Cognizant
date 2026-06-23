@@ -1,0 +1,9 @@
+CREATE FUNCTION GetBonusMarks
+(
+    @Marks INT
+)
+RETURNS INT
+AS
+BEGIN
+    RETURN @Marks+5;
+END;
