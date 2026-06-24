@@ -1,8 +1,30 @@
-SELECT
-    StudentID,
-    StudentName,
-    Marks,
-    ROW_NUMBER() OVER(ORDER BY Marks DESC) AS RowNumber,
-    RANK() OVER(ORDER BY Marks DESC) AS RankValue,
-    DENSE_RANK() OVER(ORDER BY Marks DESC) AS DenseRankValue
-FROM Students;
+SELECT *
+FROM
+(
+    SELECT
+        ProductID,
+        ProductName,
+        Category,
+        Price,
+
+        ROW_NUMBER() OVER
+        (
+            PARTITION BY Category
+            ORDER BY Price DESC
+        ) AS RowNum,
+
+        RANK() OVER
+        (
+            PARTITION BY Category
+            ORDER BY Price DESC
+        ) AS RankNum,
+
+        DENSE_RANK() OVER
+        (
+            PARTITION BY Category
+            ORDER BY Price DESC
+        ) AS DenseRankNum
+
+    FROM Products
+) RankedProducts
+WHERE RowNum <= 3;
