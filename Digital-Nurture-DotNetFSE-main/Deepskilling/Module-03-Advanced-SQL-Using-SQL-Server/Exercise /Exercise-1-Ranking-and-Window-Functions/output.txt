@@ -1,5 +1,11 @@
 # Output
 
+## Screenshot
+
+![Exercise 1 Output](output.png)
+
+## Output
+
 ```text
 ProductID  ProductName     Category      Price     RowNum  RankNum  DenseRankNum
 1          Laptop Pro      Electronics   1200.00      1       1          1
@@ -11,8 +17,3 @@ ProductID  ProductName     Category      Price     RowNum  RankNum  DenseRankNum
 5          Office Chair    Furniture      350.00      3       3          3
 
 9          Running Shoes   Sports         150.00      1       1          1
-```
-
-## Result
-
-The query successfully displayed the top 3 most expensive products in each category using ROW_NUMBER(), RANK(), and DENSE_RANK().
