@@ -2,7 +2,7 @@
 
 ## Screenshot
 
-![Exercise 03 Output](Exercise03_Output.png)
+![Exercise 03 Output](output.png)
 
 ## Result
 
