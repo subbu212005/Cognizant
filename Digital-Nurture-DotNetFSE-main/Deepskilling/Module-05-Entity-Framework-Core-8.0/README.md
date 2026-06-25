@@ -1,113 +1,39 @@
-# Overview of EF Core 8 and .NET 8 Integration
+# Module 5 - Entity Framework Core 8.0
 
-## Introduction
+## Overview
 
-Entity Framework (EF) Core 8 is Microsoft's modern, lightweight, and cross-platform Object-Relational Mapper (ORM) for .NET applications. It enables developers to work with databases using C# objects instead of writing SQL queries manually.
+This module introduces Entity Framework Core 8.0, Microsoft's modern Object-Relational Mapper (ORM) for .NET 8 applications. It covers database connectivity, Code-First development, CRUD operations, LINQ queries, migrations, relationships, and performance optimization techniques.
 
-.NET 8 is the latest Long-Term Support (LTS) release that offers improved performance, security, cloud integration, and seamless compatibility with Entity Framework Core 8.
+## Learning Objectives
 
----
+After completing this module, learners will be able to:
 
-## What is ORM (Object-Relational Mapping)?
+* Understand Object-Relational Mapping (ORM).
+* Differentiate Entity Framework and Entity Framework Core.
+* Configure EF Core in a .NET 8 project.
+* Connect EF Core to SQL Server.
+* Create entities using the Code-First approach.
+* Perform CRUD operations using EF Core.
+* Write LINQ queries.
+* Create and apply database migrations.
+* Configure relationships between entities.
+* Optimize EF Core application performance.
 
-Object-Relational Mapping (ORM) is a programming technique that maps database tables to C# classes and database records to objects.
+## Topics Covered
 
-Instead of writing SQL queries, developers interact with the database using C# objects.
-
-### Benefits of ORM
-
-- Reduces the amount of SQL code.
-- Improves developer productivity.
-- Simplifies database operations.
-- Provides type safety.
-- Easier maintenance and scalability.
-- Supports database migrations.
-
----
-
-## EF Core vs EF Framework
-
-| Entity Framework | Entity Framework Core |
-|------------------|----------------------|
-| Windows only | Cross-platform |
-| Supports .NET Framework | Supports .NET 8, .NET 7, .NET 6 |
-| Larger framework | Lightweight |
-| Slower performance | Faster performance |
-| Limited cloud support | Excellent cloud support |
-| Less flexible | Highly modular |
-
----
-
-## New Features in EF Core 8
-
-### Primitive Collections
-
-Supports collections of primitive data types.
-
-Example:
-
-```csharp
-public List<string> Skills { get; set; }
-```
-
----
-
-### Better Performance
-
-- Faster query execution
-- Improved memory usage
-- Optimized SQL generation
-
----
-
-### JSON Column Mapping
-
-EF Core 8 provides improved support for JSON columns in supported databases.
-
----
-
-### Complex Types
-
-Supports reusable complex value objects without requiring separate tables.
-
----
-
-### Improved LINQ Translation
-
-Generates more efficient SQL queries from LINQ expressions.
-
----
-
-### Raw SQL Improvements
-
-Enhanced support for executing raw SQL queries.
-
----
-
-### Bulk Updates and Deletes
-
-Execute update and delete operations without loading entities into memory.
-
----
-
-## Advantages of EF Core 8
-
-- Cross-platform support
-- High performance
-- Automatic change tracking
-- Strong LINQ support
-- Easy migrations
-- Better scalability
-- Cloud-ready development
-
----
+* Overview of EF Core 8 and .NET 8 Integration
+* Setting up EF Core in a .NET 8 Project
+* Creating a Simple Database Model
+* Performing Basic CRUD Operations
+* LINQ Queries in EF Core 8
+* EF Core Migrations and Database Updates
+* Handling Relationships and Data Loading
+* Performance Optimizations and Best Practices
 
 ## Learning Outcome
 
-After completing this topic, I understood the fundamentals of Object-Relational Mapping (ORM), differences between Entity Framework and Entity Framework Core, and the new features introduced in EF Core 8 with .NET 8 integration.
-
----
+After completing this module, I gained practical knowledge of developing database-driven .NET applications using Entity Framework Core 8.0, including configuring DbContext, implementing the Code-First approach, performing CRUD operations, executing LINQ queries, managing database migrations, handling relationships, and optimizing application performance.
 
 ## Conclusion
 
-Entity Framework Core 8 simplifies database development by allowing developers to work with C# objects while automatically handling SQL generation, making applications faster, cleaner, and easier to maintain.
+Entity Framework Core 8.0 simplifies database development by enabling developers to work with strongly typed C# objects while automatically generating SQL queries. It improves productivity, maintainability, scalability, and performance in modern .NET applications.
