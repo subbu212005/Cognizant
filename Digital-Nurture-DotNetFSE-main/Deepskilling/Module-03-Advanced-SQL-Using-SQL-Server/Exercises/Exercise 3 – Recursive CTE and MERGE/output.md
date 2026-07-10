@@ -1,16 +1,22 @@
 # Output
 
-## Recursive CTE Output
+## 1. Recursive CTE Output
 
 The recursive CTE successfully generated a calendar containing dates from **2025-01-01** to **2025-01-31**.
 
 ### Screenshot
 
-(beforemerge.png,aftermerge.png,StagingProducts.png)
+![Recursive CTE Output](RecursiveCTE.png)
 
 ---
 
-## Products Before MERGE
+## 2. Products Before MERGE
+
+The following screenshot shows the contents of the **Products** table before executing the MERGE statement.
+
+### Screenshot
+
+![Products Before MERGE](beforemerge.png)
 
 | ProductID | ProductName | Category | Price |
 |-----------|-------------|----------|------:|
@@ -25,7 +31,13 @@ The recursive CTE successfully generated a calendar containing dates from **2025
 
 ---
 
-## Products After MERGE
+## 3. Products After MERGE
+
+The MERGE statement updated the existing product prices and inserted a new product.
+
+### Screenshot
+
+![Products After MERGE](aftermerge.png)
 
 | ProductID | ProductName | Category | Price |
 |-----------|-------------|----------|------:|
@@ -41,7 +53,13 @@ The recursive CTE successfully generated a calendar containing dates from **2025
 
 ---
 
-## StagingProducts Table
+## 4. StagingProducts Table
+
+The staging table contains updated records that are used by the MERGE statement.
+
+### Screenshot
+
+![Staging Products](StagingProducts.png)
 
 | ProductID | ProductName | Category | Price |
 |-----------|-------------|----------|------:|
@@ -53,15 +71,15 @@ The recursive CTE successfully generated a calendar containing dates from **2025
 
 ## Observation
 
-- A recursive CTE generated all dates from **1 January 2025** to **31 January 2025**.
-- The **MERGE** statement updated the prices of existing products:
-  - Laptop B → **1200.00 → 1250.00**
-  - Dining Table → **700.00 → 750.00**
-- A new product (**Gaming Chair**) was inserted into the `Products` table.
-- The MERGE statement efficiently performed both **UPDATE** and **INSERT** operations in a single query.
+- The recursive CTE generated all dates from **01-Jan-2025** to **31-Jan-2025**.
+- The **MERGE** statement updated the prices of existing products.
+- **Laptop B** price changed from **1200.00** to **1250.00**.
+- **Dining Table** price changed from **700.00** to **750.00**.
+- A new product, **Gaming Chair**, was inserted into the `Products` table.
+- MERGE performed both **UPDATE** and **INSERT** operations in a single statement.
 
 ---
 
 ## Conclusion
 
-This exercise demonstrates the use of **Recursive CTEs** for generating sequential data and the **MERGE** statement for synchronizing data between a staging table and the main table. It simplifies ETL operations by combining update and insert actions into one statement.
+This exercise demonstrates the use of **Recursive Common Table Expressions (CTEs)** to generate sequential dates and the **MERGE** statement to synchronize data between a staging table and the main `Products` table. The MERGE statement simplifies data maintenance by combining update and insert operations into a single SQL command.
