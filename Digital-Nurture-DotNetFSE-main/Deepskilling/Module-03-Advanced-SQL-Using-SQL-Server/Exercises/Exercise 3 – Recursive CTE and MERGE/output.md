@@ -6,7 +6,7 @@ The recursive CTE successfully generated a calendar containing dates from **2025
 
 ### Screenshot
 
-![Recursive CTE Output](RecursiveCTE.png)
+![Recursive CTE Output](calendar.png)
 
 ---
 
