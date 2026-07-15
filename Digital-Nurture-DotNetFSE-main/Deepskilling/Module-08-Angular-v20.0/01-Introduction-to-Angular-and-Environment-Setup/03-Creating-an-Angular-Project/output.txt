@@ -1,0 +1,49 @@
+```text
+Microsoft Windows [Version 10.0.xxxxx]
+
+C:\Users\subbu> ng new AngularDemo
+
+√ Do you want to share pseudonymous usage data about this project with the Angular Team at Google? No
+
+√ Which stylesheet system would you like to use?
+CSS
+
+√ Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSR/SSG)? No
+
+√ Which AI tools do you want to configure with Angular best practices?
+None
+
+CREATE AngularDemo/.prettierrc
+CREATE AngularDemo/angular.json
+CREATE AngularDemo/package.json
+CREATE AngularDemo/README.md
+CREATE AngularDemo/tsconfig.json
+CREATE AngularDemo/.editorconfig
+CREATE AngularDemo/.gitignore
+CREATE AngularDemo/tsconfig.app.json
+CREATE AngularDemo/tsconfig.spec.json
+CREATE AngularDemo/.vscode/extensions.json
+CREATE AngularDemo/.vscode/launch.json
+CREATE AngularDemo/.vscode/mcp.json
+CREATE AngularDemo/.vscode/tasks.json
+CREATE AngularDemo/src/main.ts
+CREATE AngularDemo/src/index.html
+CREATE AngularDemo/src/styles.css
+CREATE AngularDemo/src/app/app.spec.ts
+CREATE AngularDemo/src/app/app.ts
+CREATE AngularDemo/src/app/app.css
+CREATE AngularDemo/src/app/app.html
+CREATE AngularDemo/src/app/app.config.ts
+CREATE AngularDemo/src/app/app.routes.ts
+CREATE AngularDemo/public/favicon.ico
+
+√ Packages installed successfully.
+
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+
+Successfully initialized git.
+
+C:\Users\subbu>
+```
