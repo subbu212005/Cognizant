@@ -1,0 +1,38 @@
+```text
+Microsoft Windows [Version 10.0.xxxxx]
+
+C:\Users\subbu> node -v
+v22.21.0
+
+C:\Users\subbu> npm -v
+11.10.1
+
+C:\Users\subbu> npm install -g @angular/cli
+
+added 286 packages in 52s
+
+71 packages are looking for funding
+  run `npm fund` for details
+
+npm notice
+npm notice New minor version of npm available! 11.10.1 -> 11.18.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.18.0
+npm notice To update run: npm install -g npm@11.18.0
+npm notice
+
+C:\Users\subbu> ng version
+
+Angular CLI: 21.2.19
+Node.js: 22.21.0
+Package Manager: npm 11.10.1
+Operating System: win32 x64
+
+Angular: <Not in a Workspace>
+
+Package                      Version
+------------------------------------------------
+@angular/cli                 21.2.19
+@angular-devkit/core         21.2.19
+@angular-devkit/schematics   21.2.19
+@schematics/angular          21.2.19
+```
