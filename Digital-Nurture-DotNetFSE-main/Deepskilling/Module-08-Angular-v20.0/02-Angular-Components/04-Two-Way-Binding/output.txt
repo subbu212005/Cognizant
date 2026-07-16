@@ -1,0 +1,45 @@
+```text
+Microsoft Windows [Version 10.0.xxxxx]
+
+C:\Users\subbu>cd AngularDemo
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 7.30 kB
+styles.css          | styles        | 95 bytes
+
+                    | Initial total | 7.39 kB
+
+Application bundle generation complete. [0.379 seconds] - 2026-07-16T04:02:56.545Z
+
+Page reload sent to client(s).
+
+9:33:02 AM [vite] (client) ✨ new dependencies optimized: @angular/forms
+
+9:33:02 AM [vite] (client) ✨ optimized dependencies changed. reloading
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 7.25 kB
+
+Application bundle generation complete. [0.628 seconds] - 2026-07-16T04:03:07.018Z
+
+Component update sent to client(s).
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 7.25 kB
+styles.css          | styles        | 95 bytes
+
+                    | Initial total | 7.34 kB
+
+Application bundle generation complete. [0.222 seconds] - 2026-07-16T04:03:16.051Z
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 6.55 kB
+
+Application bundle generation complete. [0.231 seconds] - 2026-07-16T04:03:27.390Z
+
+Component update sent to client(s).
+
+Two-Way Data Binding example executed successfully.
+```
