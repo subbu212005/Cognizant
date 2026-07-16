@@ -1,0 +1,31 @@
+```text
+Microsoft Windows [Version 10.0.xxxxx]
+
+C:\Users\subbu>cd AngularDemo
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 5.01 kB
+styles.css          | styles        | 95 bytes
+
+                    | Initial total | 5.11 kB
+
+Application bundle generation complete. [0.260 seconds] - 2026-07-16T04:08:24.222Z
+
+Page reload sent to client(s).
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 4.86 kB
+
+Application bundle generation complete. [0.264 seconds] - 2026-07-16T04:08:36.719Z
+
+Component update sent to client(s).
+
+Browser Console Output:
+
+Constructor Called
+ngOnInit Called
+
+Component Lifecycle example executed successfully.
+```
