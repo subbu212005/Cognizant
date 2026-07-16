@@ -1,0 +1,14 @@
+```text
+Microsoft Windows [Version 10.0.xxxxx]
+
+C:\Users\subbu>cd AngularDemo
+
+C:\Users\subbu\AngularDemo>ng generate component student
+
+CREATE src/app/student/student.spec.ts (561 bytes)
+CREATE src/app/student/student.ts (201 bytes)
+CREATE src/app/student/student.css (0 bytes)
+CREATE src/app/student/student.html (23 bytes)
+
+Component StudentComponent created successfully.
+```
