@@ -1,0 +1,38 @@
+```text id="0r2r2v"
+Microsoft Windows [Version 10.0.xxxxx]
+
+C:\Users\subbu>cd AngularDemo
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 6.xx kB
+styles.css          | styles        | xx bytes
+
+                    | Initial total | 6.xx kB
+
+Application bundle generation complete.
+
+Watch mode enabled. Watching for file changes...
+
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+
+➜ Local: http://localhost:4200/
+➜ Press h + Enter to show help.
+
+Structural Directives example executed successfully.
+
+Output Displayed:
+
+*ngIf
+Welcome to Angular!
+
+*ngFor
+• John
+• Rahul
+• Priya
+• Anjali
+
+*ngSwitch
+Student Login
+```
