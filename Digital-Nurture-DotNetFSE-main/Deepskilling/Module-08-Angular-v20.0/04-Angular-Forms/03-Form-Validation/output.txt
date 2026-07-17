@@ -1,0 +1,66 @@
+```text
+Microsoft Windows [Version 10.0.26200.8737]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 10.11 kB
+
+Application bundle generation complete. [0.551 seconds] - 2026-07-17T14:55:16.442Z
+
+Page reload sent to client(s).
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 14.36 kB
+
+Application bundle generation complete. [0.776 seconds] - 2026-07-17T14:55:30.498Z
+
+Component update sent to client(s).
+
+Watch mode enabled. Watching for file changes...
+
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+
+➜ Local: http://localhost:4200/
+➜ Press h + Enter to show help.
+
+Form Validation example executed successfully.
+
+-------------------------------------------------------
+
+Output
+
+Student Registration Form (Validation)
+
+Name:
+subbu
+
+Email:
+yedula2005@gmail.com
+
+Course:
+b.tech
+
+[ Register ]
+
+Submitted Data
+
+Name: subbu
+
+Email: yedula2005@gmail.com
+
+Course: b.tech
+
+Validation Rules Implemented:
+• Name is required.
+• Name must contain at least 3 characters.
+• Email is required.
+• Email must be in a valid format.
+• Course is required.
+
+Alert Message:
+Form Submitted Successfully!
+
+-------------------------------------------------------
+```
