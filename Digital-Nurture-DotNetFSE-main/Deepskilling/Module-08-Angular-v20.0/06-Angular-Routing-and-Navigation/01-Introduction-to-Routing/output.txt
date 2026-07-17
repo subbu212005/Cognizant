@@ -1,0 +1,51 @@
+Angular Routing Application Build & Test Output
+
+[BUILD STATUS]
+Command: npm run build
+Result: SUCCESS
+Output:
+Application bundle generation complete.
+Initial chunk files | Names  | Raw size
+main.js             | main   | 188.16 kB
+styles.css          | styles | 95 bytes
+
+[TEST STATUS]
+Command: npm test
+Result: SUCCESS
+Output:
+✓  AngularDemo  src/app/home/home.spec.ts (1 test)
+✓  AngularDemo  src/app/about/about.spec.ts (1 test)
+✓  AngularDemo  src/app/reverse-pipe.spec.ts (2 tests)
+✓  AngularDemo  src/app/highlight.spec.ts (1 test)
+✓  AngularDemo  src/app/student.spec.ts (1 test)
+✓  AngularDemo  src/app/student/student.spec.ts (2 tests)
+✓  AngularDemo  src/app/app.spec.ts (2 tests)
+
+Test Files: 7 passed (7)
+     Tests: 10 passed (10)
+
+[DEV SERVER]
+URL: http://localhost:4200/
+Status: RUNNING
+
+[UI VERIFICATION STATE]
+Rendered URL: http://localhost:4200/
+Main Header: Angular Routing Demo
+Navigation Bar: Home | About (Links verified functional)
+Active Route: "" (default home path)
+Active Rendered View: Home Page ("Welcome to Angular Routing.")
+Visual State: Default browser styling for navigation link items and basic structure.
+
+[IMPLEMENTATION MATTER - ANGULAR ROUTING]
+1. Route Definitions:
+   - Configured in src/app/app.routes.ts.
+   - Default path ('') redirects/maps to HomeComponent.
+   - '/about' path maps to AboutComponent.
+2. RouterLink:
+   - Configured in src/app/app.html using the [routerLink] directive.
+   - Replaces standard href anchors to prevent full-page browser reloads, keeping it a Single Page Application (SPA).
+3. RouterOutlet:
+   - Acts as a placeholder element (<router-outlet></router-outlet>) in src/app/app.html.
+   - Dynamically loads the corresponding component instance based on the active browser path.
+4. STANDALONE SETUP:
+   - AppComponent imports RouterOutlet and RouterLink directly in its imports array to support routing out-of-the-box.
