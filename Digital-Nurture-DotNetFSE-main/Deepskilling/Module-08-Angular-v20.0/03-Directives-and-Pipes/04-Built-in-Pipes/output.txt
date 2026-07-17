@@ -1,0 +1,47 @@
+```text
+Microsoft Windows [Version 10.0.26200.8737]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 8.72 kB
+styles.css          | styles        | 95 bytes
+
+                    | Initial total | 8.81 kB
+
+Application bundle generation complete. [1.754 seconds] - 2026-07-17T04:21:48.985Z
+
+Watch mode enabled. Watching for file changes...
+
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+
+➜ Local: http://localhost:4200/
+➜ Press h + Enter to show help.
+
+Built-in Pipes example executed successfully.
+
+Output:
+----------------------------------------
+Built-in Pipes Example
+
+Uppercase : ANGULAR FRAMEWORK
+
+Lowercase : angular framework
+
+Titlecase : Angular Framework
+
+Date : Friday, July 17, 2026
+
+Currency : ₹50,000.00
+
+Percent : 85%
+
+JSON :
+{
+  "id": 101,
+  "name": "John",
+  "department": "Computer Science"
+}
+----------------------------------------
+```
