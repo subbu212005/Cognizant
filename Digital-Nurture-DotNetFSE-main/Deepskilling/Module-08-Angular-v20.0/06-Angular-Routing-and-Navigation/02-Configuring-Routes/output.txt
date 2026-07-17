@@ -1,0 +1,41 @@
+Angular Route Configuration Application Build & Test Output
+
+[BUILD STATUS]
+Command: npm run build
+Result: SUCCESS
+Output:
+Application bundle generation complete.
+Initial chunk files | Names  | Raw size
+main.js             | main   | 188.16 kB
+styles.css          | styles | 95 bytes
+
+[TEST STATUS]
+Command: npm test
+Result: SUCCESS
+Output:
+✓  AngularDemo  src/app/home/home.spec.ts (1 test)
+✓  AngularDemo  src/app/about/about.spec.ts (1 test)
+✓  AngularDemo  src/app/reverse-pipe.spec.ts (2 tests)
+✓  AngularDemo  src/app/highlight.spec.ts (1 test)
+✓  AngularDemo  src/app/student.spec.ts (1 test)
+✓  AngularDemo  src/app/student/student.spec.ts (2 tests)
+✓  AngularDemo  src/app/app.spec.ts (2 tests)
+
+Test Files: 7 passed (7)
+     Tests: 10 passed (10)
+
+[DEV SERVER]
+URL: http://localhost:4200/
+Status: RUNNING
+
+[UI VERIFICATION STATE]
+Rendered URL: http://localhost:4200/home (Verified redirect from root path)
+Main Header: Angular Route Configuration
+Navigation Bar: Home | About
+Active Route: "/home"
+Active Rendered Component: HomeComponent
+Rendered Text: "Welcome to the Home Page."
+Visual Design:
+  - Heading 1: Angular Route Configuration
+  - Heading 2: Home Component
+  - Paragraph: Welcome to the Home Page.
