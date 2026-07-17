@@ -1,0 +1,34 @@
+Microsoft Windows [Version 10.0.26100.6584]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Watch mode enabled. Watching for file changes...
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 7.55 kB
+styles.css          | styles        | 95 bytes
+
+                    | Initial total | 7.65 kB
+
+Application bundle generation complete. [1.253 seconds] - 2026-07-17T17:29:15.770Z
+
+Page reload sent to client(s).
+
+Build Status: SUCCESS
+
+Application executed successfully.
+
+Browser Output:
+
+---------------------------------------
+Angular Directives Demo
+
+Student List
+
+• Subbu
+• Rahul
+• Anjali
+• Kiran
+• Priya
+---------------------------------------
