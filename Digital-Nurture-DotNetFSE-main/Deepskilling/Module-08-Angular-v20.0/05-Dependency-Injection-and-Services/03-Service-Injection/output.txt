@@ -1,0 +1,36 @@
+Microsoft Windows [Version 10.0.26100.6584]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Watch mode enabled. Watching for file changes...
+
+Page reload sent to client(s).
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 6.52 kB
+
+Application bundle generation complete. [0.397 seconds] - 2026-07-17T17:35:36.411Z
+
+Component update sent to client(s).
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 6.53 kB
+
+Application bundle generation complete. [0.462 seconds] - 2026-07-17T17:35:42.673Z
+
+Component update sent to client(s).
+
+Build Status: SUCCESS
+
+Application executed successfully.
+
+Browser Output:
+
+--------------------------------------------
+Angular Directives Demo
+
+Service Injection Example
+
+College Name: Vignan University
+--------------------------------------------
