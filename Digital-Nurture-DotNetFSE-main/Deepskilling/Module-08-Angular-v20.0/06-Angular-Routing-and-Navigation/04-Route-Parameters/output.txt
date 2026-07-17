@@ -1,0 +1,42 @@
+Angular Route Parameters Application Build & Test Output
+
+[BUILD STATUS]
+Command: npm run build
+Result: SUCCESS
+Output:
+Application bundle generation complete.
+Initial chunk files | Names  | Raw size
+main.js             | main   | 188.16 kB
+styles.css          | styles | 95 bytes
+
+[TEST STATUS]
+Command: npm test
+Result: SUCCESS
+Output:
+✓  AngularDemo  src/app/home/home.spec.ts (1 test)
+✓  AngularDemo  src/app/about/about.spec.ts (1 test)
+✓  AngularDemo  src/app/contact/contact.spec.ts (1 test)
+✓  AngularDemo  src/app/reverse-pipe.spec.ts (2 tests)
+✓  AngularDemo  src/app/highlight.spec.ts (1 test)
+✓  AngularDemo  src/app/student.spec.ts (1 test)
+✓  AngularDemo  src/app/student/student.spec.ts (2 tests)
+✓  AngularDemo  src/app/app.spec.ts (2 tests)
+
+Test Files: 8 passed (8)
+     Tests: 11 passed (11)
+
+[DEV SERVER]
+URL: http://localhost:4200/
+Status: RUNNING
+
+[UI VERIFICATION STATE]
+Rendered URL: http://localhost:4200/student/101 (Verified default route parameter loading)
+Main Header: Angular Navigation Demo
+Navigation Bar: Home | About | Contact
+Active Route: "/student/101"
+Active Rendered Component: StudentComponent (extracted parameter :id)
+Rendered Text:
+  - Student ID: 101
+Visual Design:
+  - Header: Dark Blue (Student Details)
+  - Parameter Text: Green, bold weight (Student ID: 101)
