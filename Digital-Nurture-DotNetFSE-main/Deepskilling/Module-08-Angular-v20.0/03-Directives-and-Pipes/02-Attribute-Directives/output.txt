@@ -1,0 +1,37 @@
+```text
+Microsoft Windows [Version 10.0.26200.8737]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 6.47 kB
+styles.css          | styles        | 95 bytes
+
+                    | Initial total | 6.56 kB
+
+Application bundle generation complete. [2.858 seconds] - 2026-07-17T03:44:33.411Z
+
+Watch mode enabled. Watching for file changes...
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+
+9:14:33 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+➜ Local: http://localhost:4200/
+➜ Press h + Enter to show help.
+
+Attribute Directives example executed successfully.
+
+Output:
+----------------------------------------
+Angular Attribute Directives Demo
+
+Attribute Directives Example
+
+This text uses ngClass.
+(Yellow background with red text)
+
+This text uses ngStyle.
+(Blue, bold, 20px font)
+----------------------------------------
+```
