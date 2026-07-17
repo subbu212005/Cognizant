@@ -1,3 +1,0 @@
-# Angular-Quiz
-
-Content placeholder.

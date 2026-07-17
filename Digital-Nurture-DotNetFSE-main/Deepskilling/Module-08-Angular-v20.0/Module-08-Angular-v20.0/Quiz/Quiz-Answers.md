@@ -1,3 +1,0 @@
-# Quiz-Answers
-
-Content placeholder.
