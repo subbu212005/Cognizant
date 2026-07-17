@@ -1,0 +1,42 @@
+```text
+Microsoft Windows [Version 10.0.26200.8737]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\subbu\AngularDemo>ng generate directive highlight
+
+CREATE src/app/highlight/highlight.ts
+CREATE src/app/highlight/highlight.spec.ts
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 6.91 kB
+styles.css          | styles        | 95 bytes
+
+                    | Initial total | 7.01 kB
+
+Application bundle generation complete. [0.572 seconds] - 2026-07-17T04:11:25.520Z
+
+Watch mode enabled. Watching for file changes...
+
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+
+➜ Local: http://localhost:4200/
+➜ Press h + Enter to show help.
+
+Custom Directives example executed successfully.
+
+Output:
+----------------------------------------
+Custom Directive Example
+
+Move the mouse over this text.
+
+On Mouse Hover:
+• Background Color changes to Yellow.
+• Text Color changes to Red.
+
+On Mouse Leave:
+• Original styles are restored.
+----------------------------------------
+```
