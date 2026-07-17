@@ -1,0 +1,75 @@
+```text
+Microsoft Windows [Version 10.0.26200.8737]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Application bundle generation complete. [0.511 seconds] - 2026-07-17T14:39:40.769Z
+
+Page reload sent to client(s).
+
+8:09:46 PM [vite] (client) ✨ new dependencies optimized: @angular/forms
+
+8:09:46 PM [vite] (client) ✨ optimized dependencies changed. reloading
+
+Initial chunk files | Names | Raw size
+main.js             | main  | 10.45 kB |
+
+Application bundle generation complete. [0.431 seconds] - 2026-07-17T14:39:51.076Z
+
+Component update sent to client(s).
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 10.45 kB |
+styles.css          | styles        | 95 bytes |
+
+                    | Initial total | 10.54 kB
+
+Application bundle generation complete. [2.412 seconds] - 2026-07-17T14:43:47.994Z
+
+Watch mode enabled. Watching for file changes...
+
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+
+➜ Local: http://localhost:4200/
+➜ Press h + Enter to show help.
+
+Template-Driven Forms example executed successfully.
+
+----------------------------------------
+Output
+
+Student Registration Form
+
+Name:
+_____________________
+
+Email:
+_____________________
+
+Course:
+_____________________
+
+[ Register ]
+
+Submitted Data
+
+Name:
+Email:
+Course:
+
+After entering values and clicking the Register button:
+
+Alert:
+Form Submitted Successfully!
+
+Submitted Data
+
+Name: John Doe
+Email: john@example.com
+Course: Angular Development
+
+----------------------------------------
+```
