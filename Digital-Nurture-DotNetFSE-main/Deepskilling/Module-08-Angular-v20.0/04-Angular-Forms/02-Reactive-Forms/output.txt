@@ -1,0 +1,53 @@
+```text
+Microsoft Windows [Version 10.0.26200.8737]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\subbu\AngularDemo>ng serve
+
+Initial chunk files | Names         | Raw size
+main.js             | main          | 9.37 kB
+styles.css          | styles        | 95 bytes
+
+                    | Initial total | 9.47 kB
+
+Application bundle generation complete. [2.365 seconds] - 2026-07-17T14:47:51.044Z
+
+Watch mode enabled. Watching for file changes...
+
+NOTE: Raw file sizes do not reflect development server per-request transformations.
+
+➜ Local: http://localhost:4200/
+➜ Press h + Enter to show help.
+
+Reactive Forms example executed successfully.
+
+-------------------------------------------------------
+
+Output
+
+Reactive Student Registration Form
+
+Name:
+subbu
+
+Email:
+yedula2005@gmail.com
+
+Course:
+cs
+
+[ Register ]
+
+Submitted Data
+
+Name: subbu
+
+Email: yedula2005@gmail.com
+
+Course: cs
+
+Alert Message:
+Reactive Form Submitted Successfully!
+
+-------------------------------------------------------
+```
