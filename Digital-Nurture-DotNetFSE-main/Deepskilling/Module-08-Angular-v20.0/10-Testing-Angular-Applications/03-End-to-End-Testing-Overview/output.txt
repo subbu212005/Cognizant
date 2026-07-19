@@ -1,0 +1,34 @@
+Angular End-to-End Testing Application Build & Test Output
+[BUILD STATUS]
+Command: npm run build
+Result: SUCCESS
+Output:
+Application bundle generation complete.
+Initial chunk files | Names  | Raw size
+main.js             | main   | 188.16 kB
+styles.css          | styles | 95 bytes
+[UNIT TEST STATUS]
+Command: npm test
+Result: SUCCESS
+Output:
+✓  AngularDemo  src/app/app.spec.ts (2 tests)
+Test Files: 11 passed (11)
+     Tests: 17 passed (17)
+[PLAYWRIGHT E2E TEST STATUS]
+Command: npx playwright test
+Result: SUCCESS
+Output:
+Running 1 test using 1 worker
+  ✓  1 tests\home.spec.ts:3:5 › Home Page Test (355ms)
+  1 passed (2.5s)
+[DEV SERVER]
+URL: http://localhost:4200/
+Status: RUNNING
+[UI VERIFICATION STATE]
+Rendered URL: http://localhost:4200
+Main Header: End-to-End Testing Overview
+Horizontal Rule: No
+Content: "Welcome to Angular End-to-End Testing Demo"
+Visual Design:
+  - Header: Dark blue (#00008b)
+  - Paragraph: Font size 20px
