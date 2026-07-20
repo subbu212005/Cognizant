@@ -1,0 +1,58 @@
+<h2>Student Registration Form (Validation)</h2>
+
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+
+  <label>Name:</label><br>
+  <input type="text" formControlName="name">
+
+  <div *ngIf="studentForm.controls.name.touched && studentForm.controls.name.invalid">
+    <small *ngIf="studentForm.controls.name.errors?.['required']">
+      Name is required.
+    </small>
+
+    <small *ngIf="studentForm.controls.name.errors?.['minlength']">
+      Minimum 3 characters required.
+    </small>
+  </div>
+
+  <br>
+
+  <label>Email:</label><br>
+  <input type="email" formControlName="email">
+
+  <div *ngIf="studentForm.controls.email.touched && studentForm.controls.email.invalid">
+    <small *ngIf="studentForm.controls.email.errors?.['required']">
+      Email is required.
+    </small>
+
+    <small *ngIf="studentForm.controls.email.errors?.['email']">
+      Enter a valid email.
+    </small>
+  </div>
+
+  <br>
+
+  <label>Course:</label><br>
+  <input type="text" formControlName="course">
+
+  <div *ngIf="studentForm.controls.course.touched && studentForm.controls.course.invalid">
+    <small>Course is required.</small>
+  </div>
+
+  <br><br>
+
+  <button
+      type="submit"
+      [disabled]="studentForm.invalid">
+      Register
+  </button>
+
+</form>
+
+<hr>
+
+<h3>Submitted Data</h3>
+
+<p><strong>Name:</strong> {{ studentForm.value.name }}</p>
+<p><strong>Email:</strong> {{ studentForm.value.email }}</p>
+<p><strong>Course:</strong> {{ studentForm.value.course }}</p>
