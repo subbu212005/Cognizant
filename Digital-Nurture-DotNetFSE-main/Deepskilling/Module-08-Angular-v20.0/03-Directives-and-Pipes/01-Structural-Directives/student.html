@@ -1,0 +1,37 @@
+<h2>Structural Directives Example</h2>
+
+<h3>*ngIf</h3>
+
+<p *ngIf="isLoggedIn">
+  Welcome to Angular!
+</p>
+
+<hr>
+
+<h3>*ngFor</h3>
+
+<ul>
+  <li *ngFor="let student of students">
+    {{ student }}
+  </li>
+</ul>
+
+<hr>
+
+<h3>*ngSwitch</h3>
+
+<div [ngSwitch]="role">
+
+  <p *ngSwitchCase="'Admin'">
+    Administrator Login
+  </p>
+
+  <p *ngSwitchCase="'Student'">
+    Student Login
+  </p>
+
+  <p *ngSwitchDefault>
+    Guest User
+  </p>
+
+</div>
