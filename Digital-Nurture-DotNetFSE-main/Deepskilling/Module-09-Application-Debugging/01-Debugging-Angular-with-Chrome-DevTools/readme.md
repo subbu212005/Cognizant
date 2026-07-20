@@ -1,8 +1,19 @@
-# Debugging Angular with Chrome DevTools
+# 01 - Debugging Angular with Chrome DevTools
 
-## Aim
+## Overview
 
-To learn how to debug Angular applications using Google Chrome DevTools by inspecting the DOM, setting breakpoints, analyzing TypeScript code, and identifying runtime errors.
+This exercise demonstrates how to debug an Angular application using **Google Chrome DevTools**. Chrome DevTools helps developers inspect HTML elements, analyze CSS, monitor JavaScript execution, debug TypeScript using source maps, and identify runtime errors efficiently.
+
+---
+
+## Objective
+
+- Run an Angular application.
+- Open Chrome DevTools.
+- Inspect the DOM structure.
+- Debug TypeScript code using breakpoints.
+- Analyze variables and the call stack.
+- Use the Console for logging and debugging.
 
 ---
 
@@ -12,100 +23,147 @@ To learn how to debug Angular applications using Google Chrome DevTools by inspe
 - Node.js
 - Angular CLI
 - Google Chrome
-- Angular Application
+- Angular Project
 
 ---
 
-## Steps to Perform
+## Files
 
-### Step 1: Start the Angular Application
+```
+01-Debugging-Angular-with-Chrome-DevTools/
+│
+├── README.md
+├── Notes.md
+└── Output.png
+```
 
-Open the project folder and run:
+---
+
+## Project Code
+
+### app.html
+
+```html
+<h1>Angular Debugging Demo</h1>
+
+<p>Welcome to Angular Chrome DevTools Debugging</p>
+
+<button (click)="showMessage()">
+  Click Me to Debug
+</button>
+```
+
+### app.ts
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.html',
+  styleUrl: './app.css'
+})
+export class App {
+
+  title = 'Angular Debugging Demo';
+
+  showMessage(): void {
+    debugger;
+    console.log("Button clicked successfully!");
+    alert("Debugging Successful!");
+  }
+
+}
+```
+
+---
+
+## Steps to Execute
+
+### Step 1
+
+Open the project in Visual Studio Code.
+
+### Step 2
+
+Run the Angular application.
 
 ```bash
 ng serve
 ```
 
-The application will be available at:
+### Step 3
+
+Open the browser.
 
 ```
 http://localhost:4200
 ```
 
+### Step 4
+
+Press **F12** to open Chrome DevTools.
+
+### Step 5
+
+Open the **Sources** tab.
+
+### Step 6
+
+Click the **Click Me to Debug** button.
+
+### Step 7
+
+Execution pauses at the `debugger` statement.
+
+### Step 8
+
+Inspect:
+
+- Variables
+- Scope
+- Call Stack
+- Breakpoints
+
+### Step 9
+
+Press **F8 (Resume Script Execution)** to continue.
+
 ---
 
-### Step 2: Open Chrome DevTools
+## Expected Output
 
-- Open Google Chrome.
-- Navigate to `http://localhost:4200`.
-- Press **F12** or **Ctrl + Shift + I**.
+- Angular application runs successfully.
+- Chrome DevTools opens.
+- Execution pauses at the `debugger` statement.
+- Console displays:
 
----
-
-### Step 3: Inspect the DOM
-
-- Select the **Elements** tab.
-- Inspect HTML elements.
-- View applied CSS styles.
-- Modify HTML or CSS temporarily.
-
----
-
-### Step 4: Debug Using Console
-
-Select the **Console** tab.
-
-Example:
-
-```javascript
-console.log("Angular Application Started");
+```
+Button clicked successfully!
 ```
 
-Observe console messages and runtime errors.
+- Alert message appears:
 
----
-
-### Step 5: Debug Using Sources Panel
-
-- Open the **Sources** tab.
-- Locate the TypeScript source file.
-- Set breakpoints.
-- Refresh the application.
-- Execution pauses at the breakpoint.
-
----
-
-### Step 6: Inspect Variables
-
-When execution pauses:
-
-- View Local Variables
-- View Scope
-- View Call Stack
-- Step Over
-- Step Into
-- Step Out
-
----
-
-### Step 7: Verify Source Maps
-
-Angular automatically generates source maps in development mode.
-
-This allows debugging TypeScript instead of compiled JavaScript.
-
----
-
-## Expected Outcome
-
-- Successfully inspected Angular components.
-- Used Chrome DevTools for debugging.
-- Set breakpoints.
-- Examined variables and call stack.
-- Identified runtime issues.
+```
+Debugging Successful!
+```
 
 ---
 
 ## Learning Outcome
 
-After completing this exercise, I learned how to inspect Angular applications using Chrome DevTools, debug TypeScript code with source maps, analyze runtime behavior, and troubleshoot frontend issues efficiently.
+After completing this exercise, I learned how to:
+
+- Debug Angular applications using Chrome DevTools.
+- Inspect the DOM using the Elements panel.
+- Use the Sources panel for debugging.
+- Set and use breakpoints.
+- Inspect variables, scope, and the call stack.
+- Debug TypeScript code using source maps.
+- Improve application quality by identifying and resolving runtime issues.
+
+---
+
+## Conclusion
+
+Chrome DevTools is a powerful debugging tool that enables developers to efficiently inspect, analyze, and troubleshoot Angular applications. Using breakpoints, source maps, and the console significantly improves the debugging process and helps build reliable web applications.
