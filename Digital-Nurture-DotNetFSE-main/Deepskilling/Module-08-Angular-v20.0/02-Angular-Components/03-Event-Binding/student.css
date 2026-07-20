@@ -1,0 +1,14 @@
+h2 {
+    color: green;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+p {
+    margin-top: 15px;
+    color: blue;
+    font-weight: bold;
+}
