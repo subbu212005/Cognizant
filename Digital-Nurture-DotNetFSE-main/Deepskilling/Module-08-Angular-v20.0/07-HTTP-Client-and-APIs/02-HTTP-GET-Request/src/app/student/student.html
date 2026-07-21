@@ -1,0 +1,17 @@
+<h1>Angular HTTP GET Request</h1>
+<hr>
+<h2>Student List</h2>
+
+<table border="1" cellspacing="0" cellpadding="8">
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+</tr>
+
+<tr *ngFor="let s of students">
+<td>{{s.id}}</td>
+<td>{{s.name}}</td>
+<td>{{s.email}}</td>
+</tr>
+</table>
