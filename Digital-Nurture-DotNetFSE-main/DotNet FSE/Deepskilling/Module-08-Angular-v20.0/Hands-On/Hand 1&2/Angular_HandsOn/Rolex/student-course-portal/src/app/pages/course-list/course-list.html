@@ -1,0 +1,23 @@
+<div class="course-list-container">
+  <header class="list-header">
+    <h1 class="page-title">Available Courses</h1>
+    <p class="page-subtitle">Browse through our college curriculum. Click the 'Enroll' button on any course card to initiate enrollment.</p>
+  </header>
+
+  <div class="courses-grid">
+    <app-course-card 
+      *ngFor="let c of courses" 
+      [course]="c" 
+      (enrollRequested)="onEnroll($event)">
+    </app-course-card>
+  </div>
+
+  <div class="selection-status card" *ngIf="selectedCourseId">
+    <div class="status-inner">
+      <div class="status-indicator-dot"></div>
+      <p class="status-text">
+        Selected course ID: <strong class="highlight-id">{{ selectedCourseId }}</strong>
+      </p>
+    </div>
+  </div>
+</div>

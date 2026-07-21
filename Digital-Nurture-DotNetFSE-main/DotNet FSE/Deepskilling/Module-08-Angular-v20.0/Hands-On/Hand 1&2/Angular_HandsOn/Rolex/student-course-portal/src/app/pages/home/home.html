@@ -1,0 +1,50 @@
+<div class="home-container">
+  <header class="home-header">
+    <h1 class="portal-title">{{ portalName }}</h1>
+    <p class="portal-subtitle">Welcome to your Student Course Portal. Manage your profile, view course listings, track your academic performance, and enroll in new courses.</p>
+  </header>
+
+  <div class="stats-grid">
+    <div class="stat-card card">
+      <div class="stat-icon courses-icon"></div>
+      <div class="stat-details">
+        <span class="stat-label">Courses Available</span>
+        <span class="stat-value">{{ coursesAvailable }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card card">
+      <div class="stat-icon enrolled-icon"></div>
+      <div class="stat-details">
+        <span class="stat-label">Courses Enrolled</span>
+        <span class="stat-value">{{ enrolledCount }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card card">
+      <div class="stat-icon gpa-icon"></div>
+      <div class="stat-details">
+        <span class="stat-label">Current GPA</span>
+        <span class="stat-value">{{ gpa }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions-section card">
+    <h2>Portal Quick Actions</h2>
+    <div class="actions-grid">
+      <div class="action-box">
+        <button class="btn-primary" [disabled]="!isPortalActive" (click)="onEnrollClick()">
+          Enroll Now
+        </button>
+        <p *ngIf="message" class="enroll-message">{{ message }}</p>
+      </div>
+
+      <div class="action-box">
+        <label for="search-input" class="search-label">Search Portal Courses</label>
+        <input id="search-input" type="text" [(ngModel)]="searchTerm" placeholder="Type to search courses..." />
+        <p *ngIf="searchTerm" class="search-feedback">Searching for: <strong>{{ searchTerm }}</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
