@@ -1,0 +1,14 @@
+<h1>Angular Error Handling and Interceptors</h1>
+<hr>
+<h2>Student List</h2>
+
+<p style="color:red" *ngIf="error">{{error}}</p>
+
+<table border="1" cellspacing="0" cellpadding="8">
+<tr><th>ID</th><th>Name</th><th>Email</th></tr>
+<tr *ngFor="let s of students">
+<td>{{s.id}}</td>
+<td>{{s.name}}</td>
+<td>{{s.email}}</td>
+</tr>
+</table>
