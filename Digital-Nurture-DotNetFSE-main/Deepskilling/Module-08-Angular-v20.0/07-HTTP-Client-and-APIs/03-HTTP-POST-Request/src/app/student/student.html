@@ -1,0 +1,17 @@
+<h1>Angular HTTP POST Request</h1>
+<hr>
+<h2>Add Student</h2>
+
+<p>Name</p>
+<input type="text" [(ngModel)]="name">
+
+<p>Email</p>
+<input type="email" [(ngModel)]="email">
+
+<br><br>
+<button (click)="submit()">Submit</button>
+
+<hr>
+
+<h2>Server Response</h2>
+<pre>{{response | json}}</pre>
