@@ -1,0 +1,20 @@
+<h1>Angular HTTP PUT and DELETE</h1>
+<hr>
+<h2>Update or Delete Student</h2>
+
+<p>Name</p>
+<input [(ngModel)]="name">
+
+<p>Email</p>
+<input [(ngModel)]="email">
+
+<br><br>
+
+<button (click)="updateStudent()">Update</button>
+<button (click)="deleteStudent()">Delete</button>
+
+<hr>
+
+<h2>Server Response</h2>
+
+<pre>{{response | json}}</pre>
