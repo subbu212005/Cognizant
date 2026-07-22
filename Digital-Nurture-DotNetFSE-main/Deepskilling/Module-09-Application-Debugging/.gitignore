@@ -1,0 +1,13 @@
+# Dependency directories
+**/node_modules/
+
+# Angular cache and build output
+**/.angular/
+**/dist/
+
+# IDE and Editor files
+.vscode/tasks.json
+.vscode/extensions.json
+**/mcp.json
+.DS_Store
+Thumbs.db
