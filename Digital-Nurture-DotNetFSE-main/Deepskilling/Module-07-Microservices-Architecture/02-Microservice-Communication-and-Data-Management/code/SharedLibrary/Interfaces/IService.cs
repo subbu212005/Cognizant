@@ -1,0 +1,1 @@
+namespace SharedLibrary.Interfaces; public interface IService{}
