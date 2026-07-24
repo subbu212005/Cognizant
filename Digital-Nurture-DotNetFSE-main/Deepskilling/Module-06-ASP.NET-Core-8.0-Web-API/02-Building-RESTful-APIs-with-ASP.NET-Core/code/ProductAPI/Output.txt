@@ -1,0 +1,3 @@
+GET /api/products
+200 OK
+[{"id":1,"name":"Laptop","price":50000}]
