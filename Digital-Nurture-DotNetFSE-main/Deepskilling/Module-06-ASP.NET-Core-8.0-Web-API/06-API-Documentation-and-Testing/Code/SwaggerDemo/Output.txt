@@ -1,0 +1,2 @@
+Swagger UI loaded successfully.
+GET /api/weather -> 200 OK
