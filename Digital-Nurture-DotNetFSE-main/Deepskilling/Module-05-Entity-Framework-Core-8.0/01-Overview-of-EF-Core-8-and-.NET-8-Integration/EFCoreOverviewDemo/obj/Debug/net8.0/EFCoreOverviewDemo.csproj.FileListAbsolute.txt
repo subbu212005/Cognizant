@@ -1,0 +1,14 @@
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\bin\Debug\net8.0\EFCoreOverviewDemo.exe
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\bin\Debug\net8.0\EFCoreOverviewDemo.deps.json
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\bin\Debug\net8.0\EFCoreOverviewDemo.runtimeconfig.json
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\bin\Debug\net8.0\EFCoreOverviewDemo.dll
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\bin\Debug\net8.0\EFCoreOverviewDemo.pdb
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\obj\Debug\net8.0\EFCoreOverviewDemo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\obj\Debug\net8.0\EFCoreOverviewDemo.AssemblyInfoInputs.cache
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\obj\Debug\net8.0\EFCoreOverviewDemo.AssemblyInfo.cs
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\obj\Debug\net8.0\EFCoreOverviewDemo.csproj.CoreCompileInputs.cache
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\obj\Debug\net8.0\EFCoreOverviewDemo.dll
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\obj\Debug\net8.0\refint\EFCoreOverviewDemo.dll
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\obj\Debug\net8.0\EFCoreOverviewDemo.pdb
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\obj\Debug\net8.0\EFCoreOverviewDemo.genruntimeconfig.cache
+C:\Users\subbu\Downloads\01-Overview-of-EF-Core-8-and-.NET-8-Integration\01-Overview-of-EF-Core-8-and-.NET-8-Integration\Code\EFCoreOverviewDemo\obj\Debug\net8.0\ref\EFCoreOverviewDemo.dll
