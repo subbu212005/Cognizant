@@ -1,0 +1,3 @@
+GET /api/secure
+200 OK
+{"message":"Secure endpoint"}
