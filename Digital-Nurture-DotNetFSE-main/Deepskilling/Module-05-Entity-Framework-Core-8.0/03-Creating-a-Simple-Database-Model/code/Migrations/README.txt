@@ -1,0 +1,1 @@
+Generate migrations using: dotnet ef migrations add InitialCreate
