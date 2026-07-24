@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "7x3nEdw0npU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\subbu\\Downloads\\04-Consuming-and-Creating-SOAP-Services\\04-Consuming-and-Creating-SOAP-Services\\Code\\SoapServiceDemo\\SoapServiceDemo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\subbu\\.nuget\\packages\\microsoft.extensions.objectpool\\8.0.10\\microsoft.extensions.objectpool.8.0.10.nupkg.sha512",
+    "C:\\Users\\subbu\\.nuget\\packages\\soapcore\\1.2.1.14\\soapcore.1.2.1.14.nupkg.sha512",
+    "C:\\Users\\subbu\\.nuget\\packages\\system.codedom\\9.0.2\\system.codedom.9.0.2.nupkg.sha512",
+    "C:\\Users\\subbu\\.nuget\\packages\\system.security.cryptography.pkcs\\8.0.1\\system.security.cryptography.pkcs.8.0.1.nupkg.sha512",
+    "C:\\Users\\subbu\\.nuget\\packages\\system.security.cryptography.xml\\8.0.2\\system.security.cryptography.xml.8.0.2.nupkg.sha512",
+    "C:\\Users\\subbu\\.nuget\\packages\\system.servicemodel.http\\8.1.1\\system.servicemodel.http.8.1.1.nupkg.sha512",
+    "C:\\Users\\subbu\\.nuget\\packages\\system.servicemodel.primitives\\8.1.1\\system.servicemodel.primitives.8.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}
