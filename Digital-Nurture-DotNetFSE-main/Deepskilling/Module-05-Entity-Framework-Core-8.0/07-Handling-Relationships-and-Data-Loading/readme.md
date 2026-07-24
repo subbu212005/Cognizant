@@ -105,114 +105,133 @@ public class Course
     public ICollection<Student> Students { get; set; }
 }
 ```
+# 07 - Handling Relationships and Data Loading
+
+This repository contains a .NET 8 console application demonstrating entity relationship mapping and data loading strategies using Entity Framework Core 8.
 
 ---
 
-# Data Loading Techniques
+## Project Structure & Architecture
 
-## Eager Loading
+The application defines a database schema representing **Departments**, **Employees**, and **Projects** to model different relationship types:
 
-Loads related entities together with the main entity using the `Include()` method.
-
-### Example
-
-```csharp
-var departments = await context.Departments
-    .Include(d => d.Employees)
-    .ToListAsync();
+```mermaid
+erDiagram
+    DEPARTMENT ||--o{ EMPLOYEE : "has"
+    EMPLOYEE ||--o{ EMPLOYEE_PROJECT : "participates"
+    PROJECT ||--o{ EMPLOYEE_PROJECT : "includes"
 ```
 
-### Advantages
+### Models
 
-* Fewer database queries
-* Better performance when related data is always required
+* **[Department](file:///c:/Users/subbu/Downloads/07-Handling-Relationships-and-Data-Loading/07-Handling-Relationships-and-Data-Loading/Code/RelationshipsDemo/Models/Department.cs)**: A one-to-many relationship with `Employee`.
+* **[Employee](file:///c:/Users/subbu/Downloads/07-Handling-Relationships-and-Data-Loading/07-Handling-Relationships-and-Data-Loading/Code/RelationshipsDemo/Models/Employee.cs)**: Belongs to a single `Department` and participates in multiple `Projects` via a join entity.
+* **[Project](file:///c:/Users/subbu/Downloads/07-Handling-Relationships-and-Data-Loading/07-Handling-Relationships-and-Data-Loading/Code/RelationshipsDemo/Models/Project.cs)**: Can be assigned to multiple employees.
+* **[EmployeeProject](file:///c:/Users/subbu/Downloads/07-Handling-Relationships-and-Data-Loading/07-Handling-Relationships-and-Data-Loading/Code/RelationshipsDemo/Models/EmployeeProject.cs)**: The intermediate join table representing the many-to-many relationship, with a composite key composed of `EmployeeId` and `ProjectId`.
 
 ---
 
-## Lazy Loading
+## Getting Started
 
-Loads related entities only when they are accessed for the first time.
+### Prerequisites
+* **.NET 8 SDK** installed.
+* **SQL Server** instance running locally on `localhost` (default instance).
+* **EF Core CLI Tools** installed. You can install it globally via:
+  ```bash
+  dotnet tool install --global dotnet-ef
+  ```
 
-### Example
-
-```csharp
-var department = context.Departments.First();
-
-var employees = department.Employees;
+### Configuration
+The application settings are configured in [appsettings.json](file:///c:/Users/subbu/Downloads/07-Handling-Relationships-and-Data-Loading/07-Handling-Relationships-and-Data-Loading/Code/RelationshipsDemo/appsettings.json):
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=RelationshipsDemoDB;Trusted_Connection=True;TrustServerCertificate=True;"
+  }
+}
 ```
 
-### Advantages
+### Database Migrations
+1. **Generate migration**: Generates the EF Core migration code for the models.
+   ```bash
+   dotnet ef migrations add InitialCreate
+   ```
+2. **Apply migrations**: Creates the database and applies tables.
+   ```bash
+   dotnet ef database update
+   ```
 
-* Reduces initial data retrieval
-* Loads data only when required
-
----
-
-## Explicit Loading
-
-Loads related entities manually after the main entity has been retrieved.
-
-### Example
-
-```csharp
-var department = await context.Departments.FirstAsync();
-
-await context.Entry(department)
-             .Collection(d => d.Employees)
-             .LoadAsync();
-```
-
-### Advantages
-
-* Greater control over database queries
-* Loads related data only when needed
-
----
-
-## Navigation Properties
-
-Navigation properties allow one entity to reference related entities.
-
-### Example
-
-```csharp
-public Department Department { get; set; }
-
-public ICollection<Employee> Employees { get; set; }
+### Run the Project
+To run the console application, execute:
+```bash
+dotnet run
 ```
 
 ---
 
-## Handling Circular References
+## Key EF Core Concepts Covered
 
-Circular references occur when two entities reference each other, which can cause serialization issues.
+### 1. Defining Relationships
 
-### Solutions
+* **One-to-Many** (`Department` $\rightarrow$ `Employee`):
+  Defined by the navigation properties `Department.Employees` and `Employee.Department`.
+* **Many-to-Many** (`Employee` $\leftrightarrow$ `Project`):
+  Configured explicitly using the join entity `EmployeeProject` inside the `OnModelCreating` method in [AppDbContext.cs](file:///c:/Users/subbu/Downloads/07-Handling-Relationships-and-Data-Loading/07-Handling-Relationships-and-Data-Loading/Code/RelationshipsDemo/Data/AppDbContext.cs) with a composite key:
+  ```csharp
+  modelBuilder.Entity<EmployeeProject>().HasKey(x => new { x.EmployeeId, x.ProjectId });
+  ```
 
-* Use Data Transfer Objects (DTOs)
-* Disable lazy loading when appropriate
-* Configure JSON serialization using `ReferenceHandler.IgnoreCycles`
+### 2. Design-Time DbContext Instantiation
+Since this is a console application, EF Core CLI tools cannot automatically resolve construction of `AppDbContext` at design-time. To handle this, the project implements [AppDbContextFactory](file:///c:/Users/subbu/Downloads/07-Handling-Relationships-and-Data-Loading/07-Handling-Relationships-and-Data-Loading/Code/RelationshipsDemo/Data/AppDbContextFactory.cs):
+```csharp
+public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+{
+    public AppDbContext CreateDbContext(string[] args)
+    {
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        var builder = new DbContextOptionsBuilder<AppDbContext>();
+        builder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+
+        return new AppDbContext(builder.Options);
+    }
+}
+```
+
+### 3. Data Loading Strategies (EF Core)
+
+Below is an overview of how the different loading strategies would be written in this codebase:
+
+#### A. Eager Loading
+Loads related data from the database as part of the initial query using the `.Include()` and `.ThenInclude()` methods.
+```csharp
+var employees = db.Employees
+    .Include(e => e.Department)
+    .Include(e => e.EmployeeProjects)
+        .ThenInclude(ep => ep.Project)
+    .ToList();
+```
+
+#### B. Explicit Loading
+Explicitly loads related data for a specific entity that is already loaded/tracked by the context using the `Entry()` API.
+```csharp
+var employee = db.Employees.First();
+
+// Load reference property (One-to-One / Many-to-One)
+db.Entry(employee).Reference(e => e.Department).Load();
+
+// Load collection property (One-to-Many / Many-to-Many)
+db.Entry(employee).Collection(e => e.EmployeeProjects).Load();
+```
+
+#### C. Lazy Loading
+Loads related data on-demand when the navigation property is accessed. (Requires the `Microsoft.EntityFrameworkCore.Proxies` package, marking navigation properties as `virtual`, and configuring `.UseLazyLoadingProxies()`).
+```csharp
+// Accessing the property automatically triggers a database query in the background:
+var deptName = employee.Department.Name;
+```
 
 ---
-
-## Best Practices
-
-* Use Eager Loading for frequently accessed related data.
-* Use Explicit Loading when greater control is required.
-* Avoid excessive Lazy Loading to reduce unnecessary database queries.
-* Use DTOs to prevent circular reference issues.
-* Configure relationships using Fluent API when needed.
-
----
-
-## Learning Outcome
-
-After completing this topic, I learned how to configure One-to-One, One-to-Many, and Many-to-Many relationships in Entity Framework Core 8, use Eager, Lazy, and Explicit Loading strategies, and handle circular references effectively.
-
----
-
-## Conclusion
-
-Entity relationships and data loading strategies are essential for building efficient database applications. Choosing the appropriate loading technique improves application performance, reduces unnecessary database operations, and simplifies data management in Entity Framework Core.
-
-
