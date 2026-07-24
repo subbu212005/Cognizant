@@ -1,184 +1,122 @@
 # Building RESTful APIs with ASP.NET Core
 
-## Introduction
+## Overview
 
-RESTful APIs allow applications to communicate using HTTP protocols and standard HTTP methods. ASP.NET Core Web API provides controllers, routing, model binding, and Entity Framework Core integration to build secure and scalable REST APIs.
-
-This topic explains controllers, actions, routing, CRUD operations, and JSON serialization.
+This module introduces the development of RESTful Web APIs using **ASP.NET Core 8.0**. It demonstrates how to create APIs that follow REST principles, process HTTP requests, and exchange data using JSON. The project implements a simple Product Management API with CRUD operations.
 
 ---
 
-## Controllers
+## Objectives
 
-Controllers handle incoming HTTP requests and return appropriate responses.
-
-Example:
-
-```csharp
-[ApiController]
-[Route("api/[controller]")]
-public class StudentsController : ControllerBase
-{
-}
-```
+* Understand REST architecture and HTTP methods.
+* Create Web APIs using ASP.NET Core 8.
+* Implement CRUD (Create, Read, Update, Delete) operations.
+* Use Controllers, Models, and Services.
+* Test APIs using Swagger UI.
+* Return appropriate HTTP status codes.
 
 ---
 
-## Actions
+## Prerequisites
 
-Actions are methods inside a controller that respond to HTTP requests.
-
-Example:
-
-```csharp
-[HttpGet]
-public IActionResult GetStudents()
-{
-    return Ok();
-}
-```
+* Visual Studio 2022 or Visual Studio Code
+* .NET 8 SDK
+* Basic knowledge of C#
+* ASP.NET Core Web API template
 
 ---
 
-## Routing
+## Folder Structure
 
-Routing maps incoming URLs to controller actions.
-
-### Conventional Routing
-
-```csharp
-[Route("api/[controller]")]
-```
-
-### Attribute Routing
-
-```csharp
-[HttpGet("{id}")]
-```
-
-Example URL
-
-```
-GET /api/students/1
+```text
+02-Building-RESTful-APIs-with-ASP.NET-Core
+│── README.md
+│── Notes.md
+└── Code
+    └── ProductAPI
+        ├── Controllers
+        ├── Models
+        ├── Services
+        ├── Program.cs
+        ├── appsettings.json
+        ├── ProductAPI.csproj
+        ├── Output.txt
+        └── Output.png
 ```
 
 ---
 
-## CRUD Operations
+## Project Description
 
-### GET
+The ProductAPI project provides REST endpoints to manage products. The API uses an in-memory collection to store product data and demonstrates clean separation of concerns using Controllers, Models, and Services.
 
-Retrieve records.
+---
 
-```csharp
-[HttpGet]
-public async Task<IActionResult> GetStudents()
-{
-    return Ok(await _context.Students.ToListAsync());
-}
+## API Endpoints
+
+| HTTP Method | Endpoint             | Description                |
+| ----------- | -------------------- | -------------------------- |
+| GET         | `/api/products`      | Retrieve all products      |
+| GET         | `/api/products/{id}` | Retrieve a product by ID   |
+| POST        | `/api/products`      | Create a new product       |
+| PUT         | `/api/products/{id}` | Update an existing product |
+| DELETE      | `/api/products/{id}` | Delete a product           |
+
+---
+
+## Technologies Used
+
+* ASP.NET Core 8.0
+* C#
+* REST API
+* Swagger (OpenAPI)
+* Dependency Injection
+
+---
+
+## How to Run
+
+1. Open the **ProductAPI** project.
+2. Restore NuGet packages.
+3. Build the solution.
+4. Run the project using:
+
+```bash
+dotnet run
 ```
 
----
+5. Open Swagger:
 
-### POST
-
-Insert a new record.
-
-```csharp
-[HttpPost]
-public async Task<IActionResult> AddStudent(Student student)
-{
-    _context.Students.Add(student);
-    await _context.SaveChangesAsync();
-
-    return CreatedAtAction(nameof(GetStudents), new { id = student.Id }, student);
-}
+```
+https://localhost:<port>/swagger
 ```
 
----
-
-### PUT
-
-Update an existing record.
-
-```csharp
-[HttpPut("{id}")]
-public async Task<IActionResult> UpdateStudent(int id, Student student)
-{
-    _context.Entry(student).State = EntityState.Modified;
-    await _context.SaveChangesAsync();
-
-    return NoContent();
-}
-```
+6. Test all available endpoints.
 
 ---
 
-### DELETE
+## Expected Output
 
-Delete a record.
-
-```csharp
-[HttpDelete("{id}")]
-public async Task<IActionResult> DeleteStudent(int id)
-{
-    var student = await _context.Students.FindAsync(id);
-
-    _context.Students.Remove(student);
-
-    await _context.SaveChangesAsync();
-
-    return NoContent();
-}
-```
+* Swagger UI opens successfully.
+* Product endpoints return JSON responses.
+* CRUD operations execute successfully.
+* Appropriate HTTP status codes are returned.
 
 ---
 
-## Entity Framework Core Integration
+## Learning Outcomes
 
-Entity Framework Core enables interaction with SQL Server using DbContext.
+After completing this exercise, you will be able to:
 
-```csharp
-public class AppDbContext : DbContext
-{
-    public DbSet<Student> Students { get; set; }
-}
-```
-
----
-
-## JSON Formatting and Serialization
-
-ASP.NET Core automatically serializes C# objects into JSON.
-
-Example Response
-
-```json
-{
-  "id": 1,
-  "name": "John",
-  "age": 20
-}
-```
-
----
-
-## Advantages
-
-- RESTful architecture
-- Easy CRUD implementation
-- Automatic JSON serialization
-- Entity Framework Core integration
-- Clean controller-based design
-
----
-
-## Learning Outcome
-
-After completing this topic, I learned how to build RESTful APIs using controllers, routing, CRUD operations, Entity Framework Core, and JSON serialization.
+* Design RESTful APIs.
+* Build ASP.NET Core Web APIs.
+* Implement CRUD operations.
+* Organize projects using Controllers, Models, and Services.
+* Test APIs with Swagger.
+* Understand dependency injection in ASP.NET Core.
 
 ---
 
 ## Conclusion
 
-ASP.NET Core Web API simplifies REST API development by providing built-in support for routing, controllers, Entity Framework Core, and JSON serialization.
+This exercise provides hands-on experience in developing RESTful APIs with ASP.NET Core 8. It establishes a strong foundation for building scalable, maintainable, and secure backend services using modern .NET development practices.
