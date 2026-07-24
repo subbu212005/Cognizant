@@ -1,80 +1,36 @@
-# Consuming and Creating SOAP Services
-
-## Introduction
-
-SOAP (Simple Object Access Protocol) is a protocol used to exchange structured information between applications using XML messages. Windows Communication Foundation (WCF) is Microsoft's framework for building SOAP services.
-
----
-
-## What is SOAP?
-
-SOAP is an XML-based messaging protocol.
-
-Features
-
-- XML Messaging
-- Platform Independent
-- Secure Communication
-- Standardized Protocol
-
----
-
-## What is WCF?
-
-Windows Communication Foundation (WCF) is a framework used to build SOAP-based services.
-
-Features
-
-- Reliable messaging
-- Security
-- Transactions
-- Service contracts
-
----
-
-## Consuming SOAP Services
-
-SOAP services can be consumed by adding a Service Reference.
-
-Example
-
-```csharp
-var client = new ServiceClient();
-
-var result = client.GetStudent();
+## How to Test the SOAP Endpoint
+You can test the SOAP endpoint by sending a standard XML POST request.
+### Testing via PowerShell
+Run the following script to send a SOAP envelope adding `10` and `20`:
+```powershell
+# Define the SOAP Envelope
+$soapEnvelope = @"
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:Add>
+         <tem:a>10</tem:a>
+         <tem:b>20</tem:b>
+      </tem:Add>
+   </soapenv:Body>
+</soapenv:Envelope>
+"@
+# Send the request to the SOAP endpoint
+$response = Invoke-WebRequest -Uri "http://localhost:5123/CalculatorService.asmx" `
+                           -Method Post `
+                           -ContentType "text/xml;charset=UTF-8" `
+                           -Body $soapEnvelope
+# Output response contents
+$response.Content
 ```
-
----
-
-## Creating SOAP Services
-
-Steps
-
-1. Create WCF Service
-2. Define Service Contract
-3. Implement Methods
-4. Host Service
-5. Consume Service
-
----
-
-## REST vs SOAP
-
-| REST | SOAP |
-|------|------|
-| JSON | XML |
-| Lightweight | Heavy |
-| Fast | Slower |
-| HTTP | Multiple Protocols |
-
----
-
-## Learning Outcome
-
-After completing this topic, I understood SOAP architecture, WCF services, and how to create and consume SOAP services.
-
----
-
-## Conclusion
-
-SOAP services provide secure and standardized communication for enterprise applications, while WCF simplifies SOAP service development in .NET.
+### Expected Output
+The server will respond with the calculated sum (`30`) wrapped in a SOAP envelope:
+```xml
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <s:Body>
+    <AddResponse xmlns="http://tempuri.org/">
+      <AddResult>30</AddResult>
+    </AddResponse>
+  </s:Body>
+</s:Envelope>
+```
