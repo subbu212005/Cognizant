@@ -20,147 +20,110 @@ Entity Framework Core automatically caches query execution plans to reduce the o
 
 ---
 
-## Tracking Behavior
+# 08 - EF Core 8 Performance Optimizations and Best Practices
 
-By default, Entity Framework Core tracks all retrieved entities to detect changes.
+This project demonstrates and benchmarks key performance optimization strategies and best practices in Entity Framework Core 8.
 
-### Example
-
-```csharp
-var students = await context.Students.ToListAsync();
-```
-
-Tracking is useful when entities need to be updated.
+To make the demonstration self-contained and run on any machine without external database server setups, the project is configured to use a local **SQLite** database.
 
 ---
 
-## AsNoTracking()
+##  How to Run the Project
 
-For read-only operations, use `AsNoTracking()` to disable change tracking and improve performance.
+1. Navigate to the project root:
+   ```bash
+   cd Code/PerformanceDemo
+   ```
 
-### Example
-
-```csharp
-var students = await context.Students
-    .AsNoTracking()
-    .ToListAsync();
-```
-
-### Advantages
-
-* Faster query execution
-* Lower memory consumption
-* Better performance for reporting applications
+2. Run the application:
+   ```bash
+   dotnet run
+   ```
+   *Note: Database migrations will be applied and the database will be automatically seeded on startup.*
 
 ---
 
-## Batch Processing
+##  Optimization Topics & Implementation Details
 
-Entity Framework Core groups multiple database operations into fewer database calls.
+### 1. AsNoTracking
+* **Concept**: Bypasses the EF Core state tracker for read-only queries.
+* **Why it matters**: Disabling tracking saves substantial memory (as EF doesn't need to maintain shadow properties or references in the context tracker) and executes faster because change tracking snapshots are skipped.
+* **Code Example**:
+  ```csharp
+  // Unoptimized (Tracking)
+  var products = await db.Products.ToListAsync();
 
-### Example
+  // Optimized (No Tracking)
+  var products = await db.Products.AsNoTracking().ToListAsync();
+  ```
 
-```csharp
-context.Students.AddRange(student1, student2, student3);
+### 2. Query Projection
+* **Concept**: Retrieves only the columns required by the application rather than whole entities (`SELECT *`).
+* **Why it matters**: Reduces network load, disk I/O, and client-side memory footprint by avoiding retrieval of unused columns.
+* **Code Example**:
+  ```csharp
+  // Unoptimized
+  var products = await db.Products.ToListAsync();
 
-await context.SaveChangesAsync();
-```
+  // Optimized
+  var products = await db.Products
+      .Select(p => new { p.Name, p.Price })
+      .ToListAsync();
+  ```
 
-### Benefits
+### 3. Batch Operations (Batch Insert)
+* **Concept**: Groups database write operations instead of saving them one-by-one.
+* **Why it matters**: Calling `SaveChanges()` in a loop creates a new database connection round-trip for each record, causing massive latency. Calling `SaveChanges()` once allows EF Core to execute them in bulk.
+* **Code Example**:
+  ```csharp
+  // Unoptimized
+  for (int i = 0; i < 200; i++) {
+      db.Products.Add(new Product { ... });
+      await db.SaveChangesAsync(); // 200 database round-trips!
+  }
 
-* Fewer database round trips
-* Improved execution speed
-* Better scalability
+  // Optimized
+  for (int i = 0; i < 200; i++) {
+      db.Products.Add(new Product { ... });
+  }
+  await db.SaveChangesAsync(); // 1 database round-trip!
+  ```
 
----
+### 4. Compiled Queries
+* **Concept**: Pre-compiles query execution plans so EF Core doesn't have to translate LINQ expressions to SQL on every execution.
+* **Why it matters**: Useful for frequently executed queries to eliminate translation and compilation overhead.
+* **Code Example**:
+  ```csharp
+  // Define compiled query
+  private static readonly Func<AppDbContext, decimal, IAsyncEnumerable<Product>> _productsByPriceCompiled =
+      EF.CompileAsyncQuery((AppDbContext db, decimal minPrice) =>
+          db.Products.Where(p => p.Price >= minPrice));
+  ```
 
-## Bulk Operations
+### 5. Bulk Updates & Deletes (EF Core 7/8)
+* **Concept**: Directly executes UPDATE or DELETE SQL statements in the database without loading the entities into the DbContext first.
+* **Why it matters**: Eliminates the overhead of loading data into memory, tracking it, modifying it, and saving it.
+* **Code Example**:
+  ```csharp
+  // Unoptimized
+  var products = await db.Products.Where(p => p.Price < 20).ToListAsync();
+  foreach(var p in products) { p.Price += 1.0m; }
+  await db.SaveChangesAsync();
 
-Bulk operations allow inserting, updating, or deleting multiple records efficiently.
+  // Optimized (EF Core 8 ExecuteUpdate)
+  await db.Products
+      .Where(p => p.Price < 20)
+      .ExecuteUpdateAsync(s => s.SetProperty(p => p.Price, p => p.Price + 1.0m));
+  ```
 
-### Example
-
-```csharp
-context.Students.RemoveRange(students);
-
-await context.SaveChangesAsync();
-```
-
-For very large datasets, third-party libraries such as **EFCore.BulkExtensions** can provide even better performance.
-
----
-
-## Handling Concurrency with RowVersion
-
-Concurrency occurs when multiple users update the same record simultaneously.
-
-A `RowVersion` column helps detect conflicts.
-
-### Example
-
-```csharp
-public class Student
-{
-    public int StudentId { get; set; }
-
-    public string Name { get; set; }
-
-    [Timestamp]
-    public byte[] RowVersion { get; set; }
-}
-```
-
-### Advantages
-
-* Prevents accidental data overwrites
-* Ensures data consistency
-* Supports optimistic concurrency
-
----
-
-## Using Compiled Queries
-
-Compiled queries improve performance by compiling frequently executed LINQ queries only once.
-
-### Example
-
-```csharp
-private static readonly Func<AppDbContext, int, Student> GetStudentById =
-    EF.CompileQuery(
-        (AppDbContext context, int id) =>
-            context.Students.FirstOrDefault(s => s.StudentId == id));
-```
-
-### Benefits
-
-* Faster repeated query execution
-* Reduced query compilation overhead
-* Improved application responsiveness
+### 6. Optimistic Concurrency
+* **Concept**: Detects concurrency conflicts when multiple users attempt to update the same record simultaneously using a concurrency check token.
+* **Implementation**: We use the `Version` property on `Product` with `[ConcurrencyCheck]`. The application intercepts `DbUpdateConcurrencyException`, reloads values from the database, and resolves conflict.
 
 ---
 
-## Performance Best Practices
-
-* Use `AsNoTracking()` for read-only queries.
-* Retrieve only required columns using `Select()`.
-* Avoid unnecessary database queries.
-* Use asynchronous methods such as `ToListAsync()` and `SaveChangesAsync()`.
-* Apply indexes to frequently searched columns.
-* Use eager loading only when related data is required.
-* Avoid excessive lazy loading.
-* Use compiled queries for frequently executed operations.
-* Batch multiple database operations whenever possible.
-* Handle concurrency using `RowVersion`.
-
----
-
-## Learning Outcome
-
-After completing this topic, I learned how to optimize Entity Framework Core applications using query caching, tracking behavior, `AsNoTracking()`, batch processing, bulk operations, optimistic concurrency with `RowVersion`, compiled queries, and other performance best practices.
-
----
-
-## Conclusion
-
-Performance optimization is a key aspect of Entity Framework Core development. Applying best practices such as efficient querying, optimized tracking behavior, batch processing, and concurrency handling helps build scalable, reliable, and high-performance .NET applications.
-
+##  Performance Notes on Local SQLite
+When running these benchmarks locally, some database optimizations (like compiled queries and bulk updates) might appear faster in their unoptimized form. 
+This is because:
+1. **Zero Network Latency**: SQLite is an in-process database, meaning network roundtrip latency is zero. The database command generation overhead of some advanced queries can sometimes exceed SQLite's fast local execution.
+2. **Dataset Size**: On production enterprise databases with millions of rows and multi-millisecond network latency, optimizations like Projections and Bulk Updates yield orders-of-magnitude improvements.
