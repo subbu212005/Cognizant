@@ -1,0 +1,40 @@
+### 1. GET Request to http://localhost:5000/api/products
+Status: 200 OK
+Response:
+{
+  "page": 1,
+  "pageSize": 5,
+  "data": [
+    "Item1",
+    "Item2"
+  ]
+}
+
+### 2. GET Request to http://localhost:5000/api/products?page=2&pageSize=10
+Status: 200 OK
+Response:
+{
+  "page": 2,
+  "pageSize": 10,
+  "data": [
+    "Item1",
+    "Item2"
+  ]
+}
+
+### 3. Application Console Output (RequestLoggingMiddleware log)
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5000/api/products - - -
+/api/products
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'ProductsController.Get (AdvancedApiDemo)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Get", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Get(Int32, Int32) on controller ProductsController (AdvancedApiDemo).
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor[1]
+      Executing OkObjectResult, writing value of type '<>f__AnonymousType0`3[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String[], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action ProductsController.Get (AdvancedApiDemo) in 36.8897ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'ProductsController.Get (AdvancedApiDemo)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5000/api/products - 200 - application/json;+charset=utf-8 108.5705ms
