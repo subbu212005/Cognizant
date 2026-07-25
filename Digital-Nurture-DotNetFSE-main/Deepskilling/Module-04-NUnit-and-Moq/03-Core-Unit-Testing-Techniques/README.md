@@ -6,205 +6,282 @@ Core Unit Testing Techniques help developers verify different types of methods a
 
 These techniques improve software reliability and code quality.
 
----
 
-## Testing Strings
+## Overview
 
-String testing verifies text values returned by methods.
+**CoreTestingTechniques** is a .NET 8 console application that demonstrates essential **NUnit unit testing techniques**. The project includes examples of testing strings, collections, return types, void methods, exception handling, private methods, and code coverage concepts.
 
-### Example
-
-```csharp
-[Test]
-public void FullName_ReturnsCorrectValue()
-{
-    string fullName = "Subrahmanyeswara";
-
-    Assert.AreEqual(
-        "Subrahmanyeswara",
-        fullName);
-}
-```
-
-### Common Assertions
-
-* Assert.AreEqual()
-* Assert.AreNotEqual()
-* Assert.IsTrue()
-* Assert.IsFalse()
+It is designed to help developers understand how to write reliable and maintainable unit tests using the NUnit framework.
 
 ---
 
-## Testing Arrays and Collections
+## Objectives
 
-Collections can be tested to verify contents, count, and order.
+After completing this project, you will be able to:
 
-### Example
-
-```csharp
-[Test]
-public void List_ShouldContainThreeElements()
-{
-    var numbers = new List<int>
-    {
-        10, 20, 30
-    };
-
-    Assert.AreEqual(3, numbers.Count);
-}
-```
-
-### Collection Assertions
-
-```csharp
-CollectionAssert.Contains(numbers, 20);
-CollectionAssert.AllItemsAreUnique(numbers);
-```
+- Test string values.
+- Test arrays and collections.
+- Verify method return types.
+- Test void methods.
+- Test methods that throw exceptions.
+- Understand testing private methods.
+- Learn the basics of code coverage.
 
 ---
 
-## Testing Return Type of Methods
+## Technologies Used
 
-Verify whether a method returns the correct value.
+- .NET 8
+- C#
+- NUnit
+- NUnit3TestAdapter
+- Microsoft.NET.Test.Sdk
+- Visual Studio 2022 / Visual Studio Code
 
-### Example
+---
 
-```csharp
-[Test]
-public void Add_ReturnsCorrectResult()
-{
-    int result = 10 + 20;
+## Project Structure
 
-    Assert.AreEqual(30, result);
-}
-```
-
-### Return Type Check
-
-```csharp
-Assert.IsInstanceOf<int>(result);
+```text
+CoreTestingTechniques
+│
+├── Models
+│   └── Student.cs
+│
+├── Services
+│   └── StudentService.cs
+│
+├── Tests
+│   ├── StringTests.cs
+│   ├── CollectionTests.cs
+│   ├── ReturnTypeTests.cs
+│   ├── VoidMethodTests.cs
+│   ├── ExceptionTests.cs
+│   ├── PrivateMethodTests.cs
+│   └── CodeCoverageDemo.cs
+│
+├── Program.cs
+└── CoreTestingTechniques.csproj
 ```
 
 ---
 
-## Testing Void Methods
+## Features
 
-Void methods do not return values.
+- String comparison testing
+- Collection testing
+- Return type verification
+- Void method testing
+- Exception handling tests
+- Private method testing concepts
+- Code coverage demonstration
+- Student management example
 
-Testing focuses on verifying behavior or state changes.
+---
 
-### Example
+## Student Model
 
 ```csharp
-[Test]
-public void SaveStudent_ShouldExecuteWithoutException()
+public class Student
 {
-    Assert.DoesNotThrow(() =>
-    {
-        Console.WriteLine("Student Saved");
-    });
+    public int Id { get; set; }
+
+    public string Name { get; set; } = "";
 }
 ```
 
 ---
 
-## Testing Methods that Throw Exceptions
+## Student Service
 
-NUnit provides assertions for exception testing.
+The service provides methods to:
 
-### Example
-
-```csharp
-[Test]
-public void DivideByZero_ShouldThrowException()
-{
-    Assert.Throws<DivideByZeroException>(() =>
-    {
-        int result = 10 / int.Parse("0");
-    });
-}
-```
-
-### Benefits
-
-* Verifies error handling
-* Improves application reliability
+- Add students
+- Retrieve students
+- Search students by Id
+- Validate student information
+- Generate greeting messages
 
 ---
 
-## Testing Private Methods
+## Test Files
 
-Private methods are generally tested indirectly through public methods.
+### StringTests.cs
 
-### Example
+Tests string return values.
 
-```csharp
-public int Square(int number)
-{
-    return CalculateSquare(number);
-}
-
-private int CalculateSquare(int number)
-{
-    return number * number;
-}
-```
-
-### Test
+Example:
 
 ```csharp
-[Test]
-public void Square_ReturnsCorrectValue()
-{
-    Assert.AreEqual(25, Square(5));
-}
+Assert.That(service.GetGreeting("John"),
+            Is.EqualTo("Hello John"));
 ```
 
 ---
 
-## Code Coverage
+### CollectionTests.cs
 
-Code Coverage measures how much application code is executed during testing.
+Tests collection operations.
 
-### Benefits
+Example:
 
-* Identifies untested code
-* Improves test quality
-* Reduces production defects
+```csharp
+service.AddStudent(student);
 
-### Coverage Types
+Assert.That(service.GetStudents().Count,
+            Is.EqualTo(1));
+```
 
-#### Statement Coverage
+---
 
-Measures executed statements.
+### ReturnTypeTests.cs
 
-#### Branch Coverage
+Verifies the return type of methods.
 
-Measures executed decision paths.
+Example:
 
-#### Function Coverage
+```csharp
+Assert.That(service.FindById(1),
+            Is.TypeOf<Student>());
+```
 
-Measures executed methods.
+---
+
+### VoidMethodTests.cs
+
+Tests methods that do not return values.
+
+Example:
+
+```csharp
+service.AddStudent(student);
+
+Assert.Pass();
+```
+
+---
+
+### ExceptionTests.cs
+
+Verifies that exceptions are thrown correctly.
+
+Example:
+
+```csharp
+Assert.Throws<ArgumentException>(
+    () => service.Validate(new Student()));
+```
+
+---
+
+### PrivateMethodTests.cs
+
+Private methods are generally **not tested directly**.
+
+Instead, they are tested indirectly through the public methods that use them.
+
+---
+
+### CodeCoverageDemo.cs
+
+Demonstrates the concept of code coverage.
+
+Tools commonly used include:
+
+- Visual Studio Code Coverage
+- Coverlet
+- ReportGenerator
+
+---
+
+## Program Output
+
+Running the application:
+
+```bash
+dotnet run
+```
+
+Console Output:
+
+```text
+Students Count: 1
+```
+
+---
+
+## Running Unit Tests
+
+Restore packages:
+
+```bash
+dotnet restore
+```
+
+Build the project:
+
+```bash
+dotnet build
+```
+
+Run all NUnit tests:
+
+```bash
+dotnet test
+```
+
+---
+
+## Expected Test Result
+
+```text
+Passed! All tests passed.
+```
 
 ---
 
 ## Best Practices
 
-* Test one behavior at a time
-* Use meaningful assertions
-* Cover edge cases
-* Keep tests independent
-* Aim for high code coverage
+- Test one behavior per test method.
+- Use meaningful test names.
+- Keep tests independent.
+- Follow the Arrange-Act-Assert (AAA) pattern.
+- Avoid testing implementation details.
+- Test public behavior rather than private methods.
+- Write fast and reliable tests.
 
 ---
 
-## Learning Outcome
+## Learning Outcomes
 
-After completing this topic, I understood how to test strings, collections, return values, void methods, exception handling, and measure code coverage using NUnit.
+After completing this project, you will be able to:
+
+- Write NUnit tests for different scenarios.
+- Test strings and collections.
+- Verify return types.
+- Validate exceptions.
+- Test void methods.
+- Understand indirect testing of private methods.
+- Measure code coverage for .NET applications.
 
 ---
 
-## Conclusion
+## Sample Console Output
 
-Core unit testing techniques help ensure application correctness, improve maintainability, and increase confidence in software quality.
+```text
+Students Count: 1
+```
+
+---
+
+## References
+
+- https://docs.nunit.org/
+- https://learn.microsoft.com/dotnet/core/testing/
+- https://www.c-sharpcorner.com/article/introduction-to-nunit-testing-framework/
+- https://dotnetpattern.com/nunit-introduction
+
+---
+
+**Author:** Cognizant Digital Nurture 4.0 – .NET Full Stack Engineer Learning Program
 
