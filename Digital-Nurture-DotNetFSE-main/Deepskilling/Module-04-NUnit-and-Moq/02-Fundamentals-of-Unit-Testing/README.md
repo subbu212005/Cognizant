@@ -1,216 +1,222 @@
-# Fundamentals of Unit Testing
+# UnitTestingFundamentals
 
-## Introduction
+## Overview
 
-Unit Testing is a software testing technique in which individual units or components of an application are tested independently to verify that they work correctly.
+**UnitTestingFundamentals** is a simple .NET 8 console application that demonstrates the core concepts of **Unit Testing** using the **NUnit** framework. It covers writing effective unit tests, organizing test cases, parameterized testing, setup and teardown methods, and ignoring tests.
 
-Unit tests help developers detect defects early, improve code quality, and simplify maintenance.
-
----
-
-## Characteristics of Good Unit Tests
-
-A good unit test should be:
-
-### Fast
-
-Tests should execute quickly.
-
-### Independent
-
-Tests should not depend on other tests.
-
-### Repeatable
-
-Tests should produce the same result every time.
-
-### Self-Validating
-
-Tests should automatically determine pass or fail status.
-
-### Maintainable
-
-Tests should be easy to understand and update.
+This project helps developers understand how to verify application logic through automated testing and serves as a foundation for Test-Driven Development (TDD).
 
 ---
 
-## What to Test and What Not to Test
+## Objectives
 
-### What to Test
-
-* Business Logic
-* Calculations
-* Validation Rules
-* Public Methods
-* Edge Cases
-
-### What Not to Test
-
-* Third-Party Libraries
-* Framework Code
-* Simple Getters and Setters
-* Database Connectivity (Unit Tests)
+- Understand the fundamentals of unit testing.
+- Learn the characteristics of good unit tests.
+- Write test cases using the NUnit framework.
+- Use parameterized tests to reduce duplicate code.
+- Perform setup and cleanup using NUnit attributes.
+- Skip tests using the Ignore attribute.
+- Follow best practices for organizing unit tests.
 
 ---
 
-## Naming and Organizing Tests
+## Technologies Used
 
-Test names should clearly describe the behavior being tested.
+- .NET 8
+- C#
+- NUnit
+- NUnit3TestAdapter
+- Microsoft.NET.Test.Sdk
+- Visual Studio 2022 / Visual Studio Code
 
-### Recommended Format
+---
 
-```text id="6qzkn6"
-MethodName_Scenario_ExpectedResult
+## Project Structure
+
+```text
+UnitTestingFundamentals
+│
+├── Services
+│   └── CalculatorService.cs
+│
+├── Tests
+│   ├── CalculatorServiceTests.cs
+│   ├── ParameterizedTests.cs
+│   ├── SetupTeardownTests.cs
+│   └── IgnoreTests.cs
+│
+├── Program.cs
+└── UnitTestingFundamentals.csproj
 ```
 
-### Example
+---
 
-```text id="e8x0ol"
-Add_ValidNumbers_ReturnsSum
-```
+## Features
 
-Organize tests into separate test classes based on application modules.
+- Calculator service implementation.
+- NUnit test fixture examples.
+- Parameterized unit tests.
+- Setup and TearDown methods.
+- Ignore test demonstration.
+- Simple console application for verification.
 
 ---
 
-## Black-Box Testing
+## Example Service
 
-Black-Box Testing focuses on testing functionality without knowing the internal implementation details.
+```csharp
+public class CalculatorService
+{
+    public int Add(int a, int b) => a + b;
 
-### Example
-
-Input:
-
-```text id="z4o1t9"
-2 + 3
+    public int Multiply(int a, int b) => a * b;
+}
 ```
-
-Expected Output:
-
-```text id="udyy54"
-5
-```
-
-The internal code structure is not considered.
 
 ---
 
-## Set Up and Tear Down
+## Example Test
 
-### SetUp
+```csharp
+[Test]
+public void Add_ReturnsSum()
+{
+    var service = new CalculatorService();
 
-Executed before each test method.
+    Assert.That(service.Add(2, 3), Is.EqualTo(5));
+}
+```
 
-```csharp id="w17wsr"
+---
+
+## Parameterized Test Example
+
+```csharp
+[TestCase(2, 3, 5)]
+[TestCase(4, 5, 9)]
+public void Add_TestCases(int a, int b, int expected)
+{
+    var service = new CalculatorService();
+
+    Assert.That(service.Add(a, b), Is.EqualTo(expected));
+}
+```
+
+---
+
+## Setup and TearDown Example
+
+```csharp
 [SetUp]
 public void Setup()
 {
-    // Initialization code
+    // Executed before each test
 }
-```
 
-### TearDown
-
-Executed after each test method.
-
-```csharp id="4cbv3y"
 [TearDown]
-public void Cleanup()
+public void TearDown()
 {
-    // Cleanup code
+    // Executed after each test
 }
 ```
 
 ---
 
-## Parameterized Tests
+## Ignore Test Example
 
-Parameterized tests allow the same test logic to run with multiple inputs.
-
-### Example
-
-```csharp id="nltw14"
-[TestCase(2, 3, 5)]
-[TestCase(5, 5, 10)]
-[TestCase(10, 20, 30)]
-public void Add_ReturnsCorrectResult(
-    int a,
-    int b,
-    int expected)
-{
-    Assert.AreEqual(expected, a + b);
-}
-```
-
-### Benefits
-
-* Less code duplication
-* Better test coverage
-* Easier maintenance
-
----
-
-## Ignoring Tests
-
-Tests can be temporarily skipped using the Ignore attribute.
-
-### Example
-
-```csharp id="yrm5u5"
+```csharp
 [Test]
-[Ignore("Feature under development")]
-public void FutureFeatureTest()
+[Ignore("Demo ignored test")]
+public void IgnoredTest()
 {
 }
 ```
 
 ---
 
-## Writing Trustworthy Tests
+## Sample Output
 
-A trustworthy test should:
+```text
+4 * 5 = 20
+```
 
-* Test one behavior at a time
-* Avoid dependencies on external systems
-* Use meaningful assertions
-* Produce consistent results
-* Be easy to understand
+---
 
-### Example
+## How to Run
 
-```csharp id="x7wfjw"
-Assert.AreEqual(5, calculator.Add(2, 3));
+### Restore Packages
+
+```bash
+dotnet restore
+```
+
+### Build the Project
+
+```bash
+dotnet build
+```
+
+### Run the Application
+
+```bash
+dotnet run
+```
+
+### Execute Unit Tests
+
+```bash
+dotnet test
+```
+
+---
+
+## Expected Result
+
+Application Output
+
+```text
+4 * 5 = 20
+```
+
+NUnit Output
+
+```text
+Passed! All tests passed.
 ```
 
 ---
 
 ## Best Practices
 
-* Keep tests simple
-* Use descriptive names
-* Follow Arrange-Act-Assert pattern
-* Test edge cases
-* Avoid duplicate test logic
-
-### Arrange-Act-Assert Example
-
-```csharp id="vk0dwp"
-var calculator = new Calculator();
-
-var result = calculator.Add(2, 3);
-
-Assert.AreEqual(5, result);
-```
+- Keep tests independent.
+- Write meaningful test names.
+- Follow the Arrange-Act-Assert pattern.
+- Use parameterized tests whenever possible.
+- Keep each test focused on a single behavior.
+- Avoid testing external dependencies in unit tests.
 
 ---
 
 ## Learning Outcome
 
-After completing this topic, I understood the principles of effective unit testing, test organization, parameterized testing, setup and teardown methods, and best practices for creating reliable and maintainable unit tests.
+After completing this project, you will be able to:
+
+- Create unit tests using NUnit.
+- Organize test projects effectively.
+- Write reusable parameterized tests.
+- Use Setup and TearDown methods.
+- Skip tests using the Ignore attribute.
+- Build reliable and maintainable .NET applications.
 
 ---
 
-## Conclusion
+## References
 
-Unit testing is a fundamental software quality practice that helps developers verify functionality, detect defects early, and build reliable applications.
+- https://docs.nunit.org/
+- https://learn.microsoft.com/dotnet/core/testing/
+- https://www.tutorialspoint.com/unit-testing-tutorial-for-beginners-concepts-types-tools
+- https://www.geeksforgeeks.org/software-engineering-black-box-testing/
 
+---
+
+**Author:** Cognizant Digital Nurture 4.0 – .NET FSE Learning Program
