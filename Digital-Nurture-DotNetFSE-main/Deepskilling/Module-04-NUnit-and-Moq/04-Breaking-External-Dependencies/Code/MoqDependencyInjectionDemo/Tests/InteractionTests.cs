@@ -1,0 +1,1 @@
+// Interaction testing verifies collaborator method calls using Moq.

@@ -1,0 +1,1 @@
+// State-based testing verifies object state after execution.
