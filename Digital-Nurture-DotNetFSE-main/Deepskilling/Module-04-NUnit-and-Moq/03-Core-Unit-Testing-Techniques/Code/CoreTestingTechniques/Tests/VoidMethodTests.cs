@@ -1,0 +1,1 @@
+using NUnit.Framework; using CoreTestingTechniques.Services; using CoreTestingTechniques.Models; [TestFixture] public class VoidMethodTests{[Test] public void Add(){var s=new StudentService(); s.AddStudent(new Student{Id=2,Name="B"}); Assert.Pass();}}

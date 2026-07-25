@@ -1,0 +1,1 @@
+using NUnit.Framework; using CoreTestingTechniques.Services; using CoreTestingTechniques.Models; [TestFixture] public class ReturnTypeTests{[Test] public void Find(){var s=new StudentService(); s.AddStudent(new Student{Id=1,Name="A"}); Assert.That(s.FindById(1),Is.TypeOf<Student>());}}

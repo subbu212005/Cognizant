@@ -1,0 +1,1 @@
+using CoreTestingTechniques.Models; using CoreTestingTechniques.Services; var svc=new StudentService(); svc.AddStudent(new Student{Id=1,Name="Alice"}); Console.WriteLine($"Students Count: {svc.GetStudents().Count}");

@@ -1,0 +1,1 @@
+// Demonstration: private methods are typically tested indirectly through public methods.

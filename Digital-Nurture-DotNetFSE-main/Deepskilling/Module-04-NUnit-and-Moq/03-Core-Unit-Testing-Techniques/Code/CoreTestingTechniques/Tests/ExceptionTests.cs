@@ -1,0 +1,1 @@
+using NUnit.Framework; using CoreTestingTechniques.Services; using CoreTestingTechniques.Models; [TestFixture] public class ExceptionTests{[Test] public void Validate(){Assert.Throws<ArgumentException>(()=>new StudentService().Validate(new Student()));}}

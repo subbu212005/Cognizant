@@ -1,0 +1,1 @@
+using NUnit.Framework; using CoreTestingTechniques.Services; using CoreTestingTechniques.Models; [TestFixture] public class CollectionTests{[Test] public void Add(){var s=new StudentService(); s.AddStudent(new Student{Id=1,Name="A"}); Assert.That(s.GetStudents().Count,Is.EqualTo(1));}}
