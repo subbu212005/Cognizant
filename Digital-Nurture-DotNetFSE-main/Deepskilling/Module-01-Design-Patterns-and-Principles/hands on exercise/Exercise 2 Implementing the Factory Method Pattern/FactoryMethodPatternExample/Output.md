@@ -1,0 +1,5 @@
+# Sample Output
+
+Opening Word Document
+Opening PDF Document
+Opening Excel Document
