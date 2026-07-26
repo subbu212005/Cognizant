@@ -1,0 +1,123 @@
+<div class="profile-container animate-fade-in">
+  <div class="profile-header">
+    <h1 class="page-title">Student Profile</h1>
+    <p class="page-subtitle">Manage your student records, update email details, and monitor your current academic credentials.</p>
+  </div>
+
+  <!-- Success Notification -->
+  <div class="alert-success card-glass" *ngIf="showSuccessAlert">
+    <div class="alert-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <div class="alert-body">
+      <h4>Profile Updated Successfully!</h4>
+      <p>Your academic records have been refreshed in the local portal database.</p>
+    </div>
+  </div>
+
+  <div class="profile-grid">
+    <!-- Left Column: Profile Card -->
+    <aside class="profile-card-col">
+      <div class="profile-preview-card card-glass">
+        <div class="profile-badge-glow"></div>
+        <div class="avatar-large-container">
+          <img [src]="student().avatar" [alt]="student().name" class="avatar-large">
+          <span class="edit-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="edit-icon"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </span>
+        </div>
+
+        <h2 class="profile-preview-name">{{ student().name }}</h2>
+        <span class="badge badge-cs" style="margin-top: 8px;">{{ student().major }}</span>
+
+        <div class="academic-details-list">
+          <div class="detail-item">
+            <span class="detail-label">Student ID</span>
+            <span class="detail-val">{{ student().studentId }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Email Address</span>
+            <span class="detail-val text-truncate">{{ student().email }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Cumulative GPA</span>
+            <span class="detail-val highlight-gpa">{{ student().gpa | number:'1.2-2' }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Standing</span>
+            <span class="detail-val val-green">Honor Roll</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Column: Settings Form -->
+    <main class="profile-form-col">
+      <div class="settings-card card-glass">
+        <h3 class="form-card-title">Portal Registry Settings</h3>
+        <p class="form-card-subtitle">Modify the fields below to update your student portal info. Validation rules apply.</p>
+
+        <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="profile-form">
+          
+          <!-- Full Name -->
+          <div class="form-group">
+            <label class="form-label" for="name">Full Name</label>
+            <input type="text" id="name" formControlName="name" class="form-control" placeholder="Alex Rivera"
+                   [class.is-invalid]="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+            <div class="error-feedback" *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+              <span *ngIf="profileForm.get('name')?.errors?.['required']">Full name is required.</span>
+              <span *ngIf="profileForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters.</span>
+            </div>
+          </div>
+
+          <!-- Academic Major -->
+          <div class="form-group">
+            <label class="form-label" for="major">Academic Program / Major</label>
+            <select id="major" formControlName="major" class="form-control"
+                    [class.is-invalid]="profileForm.get('major')?.invalid && profileForm.get('major')?.touched">
+              <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+              <option value="Mathematics & Applied Statistics">Mathematics & Applied Statistics</option>
+              <option value="User Interface & Product Design">User Interface & Product Design</option>
+              <option value="International Business Administration">International Business Administration</option>
+            </select>
+            <div class="error-feedback" *ngIf="profileForm.get('major')?.invalid && profileForm.get('major')?.touched">
+              <span>Academic major choice is required.</span>
+            </div>
+          </div>
+
+          <!-- Grid: ID & Email -->
+          <div class="form-row">
+            <!-- Student ID -->
+            <div class="form-group half-width">
+              <label class="form-label" for="studentId">Student ID</label>
+              <input type="text" id="studentId" formControlName="studentId" class="form-control" placeholder="U20248912"
+                     [class.is-invalid]="profileForm.get('studentId')?.invalid && profileForm.get('studentId')?.touched">
+              <div class="error-feedback" *ngIf="profileForm.get('studentId')?.invalid && profileForm.get('studentId')?.touched">
+                <span *ngIf="profileForm.get('studentId')?.errors?.['required']">Student ID is required.</span>
+                <span *ngIf="profileForm.get('studentId')?.errors?.['pattern']">ID format must be U followed by 8 numbers.</span>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group half-width">
+              <label class="form-label" for="email">Student Email Address</label>
+              <input type="email" id="email" formControlName="email" class="form-control" placeholder="alex@university.edu"
+                     [class.is-invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+              <div class="error-feedback" *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+                <span *ngIf="profileForm.get('email')?.errors?.['required']">Email address is required.</span>
+                <span *ngIf="profileForm.get('email')?.errors?.['email']">Must be a valid email format.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Profile Registry
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="courses-container animate-fade-in">
+  <div class="catalog-header">
+    <h1 class="page-title">Course Catalog</h1>
+    <p class="page-subtitle">Browse, search, and enroll in available modules. Track active modules or view completed accomplishments.</p>
+  </div>
+
+  <!-- Search and Filter Bar -->
+  <section class="filter-section card-glass">
+    <div class="search-box">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" class="form-control search-input" placeholder="Search by course title, instructor, or description..." [value]="searchTerm()" (input)="onSearch($event)">
+    </div>
+
+    <!-- Category Filters -->
+    <div class="filter-group">
+      <span class="filter-label">Categories:</span>
+      <div class="chips-container">
+        <button *ngFor="let cat of categories" class="chip" [class.active]="selectedCategory() === cat" (click)="setCategory(cat)">
+          {{ cat }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Status Filters -->
+    <div class="filter-group">
+      <span class="filter-label">Status:</span>
+      <div class="chips-container">
+        <button *ngFor="let stat of statuses" class="chip" [class.active]="selectedStatus() === stat" (click)="setStatus(stat)">
+          {{ stat }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Grid -->
+  <section class="courses-grid" *ngIf="filteredCourses().length > 0; else noCourses">
+    <div class="course-card card-glass" *ngFor="let course of filteredCourses()" [class.completed]="course.status === 'completed'">
+      <div class="card-banner">
+        <img [src]="course.image" [alt]="course.title" class="banner-img">
+        <span class="category-badge badge" [ngClass]="{
+          'badge-cs': course.category === 'Computer Science',
+          'badge-math': course.category === 'Mathematics',
+          'badge-design': course.category === 'Design',
+          'badge-business': course.category === 'Business'
+        }">{{ course.category }}</span>
+      </div>
+
+      <div class="card-body">
+        <div class="course-metadata">
+          <span class="credits">{{ course.credits }} Credits</span>
+          <span class="instructor">By {{ course.instructor }}</span>
+        </div>
+        <h3 class="course-title">{{ course.title }}</h3>
+        <p class="course-desc">{{ course.description }}</p>
+
+        <!-- Progress (Only shown for Enrolled / Completed) -->
+        <div class="course-progress-section" *ngIf="course.status !== 'available'">
+          <div class="progress-details">
+            <span class="progress-label">Course Progress</span>
+            <span class="progress-value">{{ course.progress }}%</span>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar" [class.progress-bar-completed]="course.status === 'completed'" [style.width.%]="course.progress"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <!-- Available Action -->
+        <button *ngIf="course.status === 'available'" class="btn btn-primary btn-full" (click)="enroll(course.id)">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          Enroll in Course
+        </button>
+
+        <!-- Enrolled Action -->
+        <button *ngIf="course.status === 'enrolled'" class="btn btn-secondary btn-full btn-resume" (click)="resume(course.id)">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          Resume Lesson
+        </button>
+
+        <!-- Completed Action -->
+        <div *ngIf="course.status === 'completed'" class="completed-indicator">
+          <div class="check-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="check-icon"><path d="M20 6 9 17l-5-5"/></svg>
+          </div>
+          <span class="completed-text">Completed Module</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Empty Results State -->
+  <ng-template #noCourses>
+    <div class="empty-results card-glass animate-fade-in">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
+      <h3>No Courses Found</h3>
+      <p>We couldn't find any courses matching your search criteria. Try modifying your search keywords or clearing the category filters.</p>
+      <button class="btn btn-primary" (click)="searchTerm.set(''); selectedCategory.set('All'); selectedStatus.set('All')">Clear All Filters</button>
+    </div>
+  </ng-template>
+</div>
