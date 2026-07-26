@@ -1,0 +1,1 @@
+INSERT INTO Departments VALUES (1,'HR'),(2,'Finance'),(3,'IT'),(4,'Marketing');
