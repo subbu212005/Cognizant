@@ -1,0 +1,7 @@
+# Exercise 2 - Expected Output
+
+```
+EmployeeID  FirstName  LastName  DepartmentID  Salary   JoinDate
+----------  ---------  --------  ------------  ------   --------
+2           Jane       Smith     2             6000.00  2019-03-22
+```
