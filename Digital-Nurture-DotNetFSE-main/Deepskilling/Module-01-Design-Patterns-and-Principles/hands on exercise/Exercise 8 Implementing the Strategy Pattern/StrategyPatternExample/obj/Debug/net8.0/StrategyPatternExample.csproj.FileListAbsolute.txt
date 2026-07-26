@@ -1,0 +1,14 @@
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\bin\Debug\net8.0\StrategyPatternExample.exe
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\bin\Debug\net8.0\StrategyPatternExample.deps.json
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\bin\Debug\net8.0\StrategyPatternExample.runtimeconfig.json
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\bin\Debug\net8.0\StrategyPatternExample.dll
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\bin\Debug\net8.0\StrategyPatternExample.pdb
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\obj\Debug\net8.0\StrategyPatternExample.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\obj\Debug\net8.0\StrategyPatternExample.AssemblyInfoInputs.cache
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\obj\Debug\net8.0\StrategyPatternExample.AssemblyInfo.cs
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\obj\Debug\net8.0\StrategyPatternExample.csproj.CoreCompileInputs.cache
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\obj\Debug\net8.0\StrategyPatternExample.dll
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\obj\Debug\net8.0\refint\StrategyPatternExample.dll
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\obj\Debug\net8.0\StrategyPatternExample.pdb
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\obj\Debug\net8.0\StrategyPatternExample.genruntimeconfig.cache
+C:\Users\subbu\Downloads\StrategyPatternExample\StrategyPatternExample\obj\Debug\net8.0\ref\StrategyPatternExample.dll

@@ -1,0 +1,10 @@
+using ObserverPatternExample;
+var market=new StockMarket();
+var mobile=new MobileApp();
+var web=new WebApp();
+market.Register(mobile);
+market.Register(web);
+market.SetStock("TCS",3850.50);
+Console.WriteLine();
+market.Deregister(web);
+market.SetStock("Infosys",1625.75);
