@@ -1,0 +1,64 @@
+<div class="course-card card-glass" [class.completed]="course.status === 'completed'">
+  <button class="btn-delete-card" (click)="onDelete(); $event.stopPropagation();" title="Delete Course">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="delete-icon"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+  </button>
+  <div class="card-banner" [routerLink]="['/courses', course.id]" style="cursor: pointer;">
+    <img [src]="course.image" [alt]="course.title" class="banner-img">
+    <span class="category-badge badge" [ngClass]="{
+      'badge-cs': course.category === 'Computer Science',
+      'badge-math': course.category === 'Mathematics',
+      'badge-design': course.category === 'Design',
+      'badge-business': course.category === 'Business'
+    }">{{ course.category }}</span>
+  </div>
+
+  <div class="card-body">
+    <div class="course-metadata">
+      <span class="credits">{{ course.credits }} Credits</span>
+      <span class="instructor">By {{ course.instructor }}</span>
+    </div>
+    <h3 class="course-title">
+      <a [routerLink]="['/courses', course.id]">{{ course.title }}</a>
+    </h3>
+    <p class="course-desc">{{ course.description }}</p>
+
+    <!-- Progress (Only shown for Enrolled / Completed) -->
+    <div class="course-progress-section" *ngIf="course.status !== 'available'">
+      <div class="progress-details">
+        <span class="progress-label">Course Progress</span>
+        <span class="progress-value">{{ course.progress }}%</span>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" [class.progress-bar-completed]="course.status === 'completed'" [style.width.%]="course.progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-actions">
+    <!-- Available Action -->
+    <button *ngIf="course.status === 'available'" class="btn btn-primary btn-full" (click)="onEnroll()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+      Enroll in Course
+    </button>
+
+    <!-- Enrolled Action -->
+    <div *ngIf="course.status === 'enrolled'" class="enrolled-actions-group">
+      <button class="btn btn-secondary btn-resume" (click)="onResume()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+        Resume
+      </button>
+      <button class="btn btn-unenroll" (click)="onUnenroll()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Unenroll
+      </button>
+    </div>
+
+    <!-- Completed Action -->
+    <div *ngIf="course.status === 'completed'" class="completed-indicator">
+      <div class="check-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="check-icon"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <span class="completed-text">Completed Module</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="courses-container animate-fade-in">
+  <div class="catalog-header">
+    <h1 class="page-title">Course Catalog</h1>
+    <p class="page-subtitle">Browse, search, and enroll in available modules. Track active modules or view completed accomplishments.</p>
+  </div>
+
+  <!-- Search and Filter Bar -->
+  <section class="filter-section card-glass">
+    <div class="search-box">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" class="form-control search-input" placeholder="Search by course title, instructor, or description..." [value]="searchTerm()" (input)="onSearch($event)">
+    </div>
+
+    <!-- Category Filters -->
+    <div class="filter-group">
+      <span class="filter-label">Categories:</span>
+      <div class="chips-container">
+        <button *ngFor="let cat of categories" class="chip" [class.active]="selectedCategory() === cat" (click)="setCategory(cat)">
+          {{ cat }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Status Filters -->
+    <div class="filter-group">
+      <span class="filter-label">Status:</span>
+      <div class="chips-container">
+        <button *ngFor="let stat of statuses" class="chip" [class.active]="selectedStatus() === stat" (click)="setStatus(stat)">
+          {{ stat }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Grid -->
+  <section class="courses-grid" *ngIf="((filteredCourses$ | async) || []).length > 0; else noCourses">
+    <app-course-card 
+      *ngFor="let course of (filteredCourses$ | async)" 
+      [course]="course" 
+      (enroll)="enroll($event)" 
+      (resume)="resume($event)"
+      (unenroll)="unenroll($event)"
+      (delete)="delete($event)">
+    </app-course-card>
+  </section>
+
+
+  <!-- Empty Results State -->
+  <ng-template #noCourses>
+    <div class="empty-results card-glass animate-fade-in">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 11h6"/></svg>
+      <h3>No Courses Found</h3>
+      <p>We couldn't find any courses matching your search criteria. Try modifying your search keywords or clearing the category filters.</p>
+      <button class="btn btn-primary" (click)="clearFilters()">Clear All Filters</button>
+    </div>
+  </ng-template>
+</div>
