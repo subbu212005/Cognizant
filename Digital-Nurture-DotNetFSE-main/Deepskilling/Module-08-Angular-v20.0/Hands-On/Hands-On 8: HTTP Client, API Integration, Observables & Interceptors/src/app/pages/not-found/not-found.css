@@ -1,0 +1,86 @@
+.not-found-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 160px);
+  padding: 24px;
+}
+
+.not-found-card {
+  max-width: 540px;
+  width: 100%;
+  text-align: center;
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border-radius: var(--border-radius-lg);
+}
+
+.error-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+  margin-bottom: 8px;
+}
+
+.error-number {
+  font-size: 5rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.05);
+  position: absolute;
+  letter-spacing: -0.05em;
+  user-select: none;
+  z-index: 1;
+}
+
+.compass-icon {
+  width: 72px;
+  height: 72px;
+  color: var(--color-primary);
+  position: relative;
+  z-index: 2;
+  animation: spin 20s linear infinite;
+}
+
+.visual-glow {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+  z-index: 1;
+  filter: blur(8px);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.error-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.error-message {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.error-actions {
+  margin-top: 8px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
