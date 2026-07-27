@@ -1,0 +1,91 @@
+<div class="enrollment-container animate-fade-in">
+  <div class="page-header">
+    <h1 class="page-title">Request Course Enrollment</h1>
+    <p class="page-subtitle">Add a custom course to the catalog or enroll in a new custom module immediately.</p>
+  </div>
+
+  <div class="form-wrapper card-glass">
+    <div class="alert alert-success animate-fade-in" *ngIf="showSuccessAlert">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="alert-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <div class="alert-message">
+        <h4>Course Added Successfully!</h4>
+        <p>Your new course has been registered in the database. Redirecting to course catalog...</p>
+      </div>
+    </div>
+
+    <form [formGroup]="enrollmentForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-row">
+        <!-- Title -->
+        <div class="form-group">
+          <label for="title" class="form-label">Course Title</label>
+          <input type="text" id="title" class="form-control" placeholder="e.g. Advanced Data Science & Analytics" formControlName="title">
+          <div class="error-msg" *ngIf="enrollmentForm.get('title')?.touched && enrollmentForm.get('title')?.invalid">
+            <span *ngIf="enrollmentForm.get('title')?.errors?.['required']">Course title is required.</span>
+            <span *ngIf="enrollmentForm.get('title')?.errors?.['minlength']">Title must be at least 3 characters.</span>
+          </div>
+        </div>
+
+        <!-- Instructor -->
+        <div class="form-group">
+          <label for="instructor" class="form-label">Instructor Name</label>
+          <input type="text" id="instructor" class="form-control" placeholder="e.g. Dr. Ada Lovelace" formControlName="instructor">
+          <div class="error-msg" *ngIf="enrollmentForm.get('instructor')?.touched && enrollmentForm.get('instructor')?.invalid">
+            <span *ngIf="enrollmentForm.get('instructor')?.errors?.['required']">Instructor name is required.</span>
+            <span *ngIf="enrollmentForm.get('instructor')?.errors?.['minlength']">Instructor name must be at least 3 characters.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row three-cols">
+        <!-- Credits -->
+        <div class="form-group">
+          <label for="credits" class="form-label">Credits</label>
+          <input type="number" id="credits" class="form-control" formControlName="credits">
+          <div class="error-msg" *ngIf="enrollmentForm.get('credits')?.touched && enrollmentForm.get('credits')?.invalid">
+            <span *ngIf="enrollmentForm.get('credits')?.errors?.['required']">Credits field is required.</span>
+            <span *ngIf="enrollmentForm.get('credits')?.errors?.['min'] || enrollmentForm.get('credits')?.errors?.['max']">Credits must be between 1 and 5.</span>
+          </div>
+        </div>
+
+        <!-- Category -->
+        <div class="form-group">
+          <label for="category" class="form-label">Category</label>
+          <select id="category" class="form-control" formControlName="category">
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+          </select>
+          <div class="error-msg" *ngIf="enrollmentForm.get('category')?.touched && enrollmentForm.get('category')?.invalid">
+            Category is required.
+          </div>
+        </div>
+
+        <!-- Initial Status -->
+        <div class="form-group">
+          <label for="status" class="form-label">Initial Status</label>
+          <select id="status" class="form-control" formControlName="status">
+            <option value="enrolled">Enroll Immediately</option>
+            <option value="available">Catalog (Available)</option>
+          </select>
+          <div class="error-msg" *ngIf="enrollmentForm.get('status')?.touched && enrollmentForm.get('status')?.invalid">
+            Initial Status is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description" class="form-label">Course Description</label>
+        <textarea id="description" class="form-control text-area" rows="4" placeholder="Detailed syllabus or course summary..." formControlName="description"></textarea>
+        <div class="error-msg" *ngIf="enrollmentForm.get('description')?.touched && enrollmentForm.get('description')?.invalid">
+          <span *ngIf="enrollmentForm.get('description')?.errors?.['required']">Description is required.</span>
+          <span *ngIf="enrollmentForm.get('description')?.errors?.['minlength']">Description must be at least 10 characters long.</span>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <a routerLink="/courses" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary" [disabled]="enrollmentForm.invalid">Add Course</button>
+      </div>
+    </form>
+  </div>
+</div>

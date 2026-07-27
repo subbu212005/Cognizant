@@ -1,0 +1,144 @@
+<div class="home-container animate-fade-in" *ngIf="isLoggedIn(); else guestDashboard">
+  <!-- Hero Section -->
+  <section class="hero-section card-glass">
+    <div class="hero-content">
+      <h1 class="hero-title">Academic Portal</h1>
+      <p class="hero-subtitle">Welcome back, <span class="highlight">{{ student().name }}</span>. You are currently tracking {{ enrolledCoursesCount() }} active course{{ enrolledCoursesCount() === 1 ? '' : 's' }} in the {{ student().major }} program.</p>
+      <div class="quick-actions">
+        <a routerLink="/courses" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><path d="m15 18-6-6 6-6"/></svg>
+          Explore Catalog
+        </a>
+        <a routerLink="/profile" class="btn btn-secondary">Edit Profile</a>
+      </div>
+    </div>
+    <div class="hero-decoration">
+      <div class="glow-circle"></div>
+    </div>
+  </section>
+
+  <!-- Stats Dashboard -->
+  <section class="stats-grid">
+    <div class="stats-card card-glass">
+      <div class="stats-icon gpa-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div class="stats-info">
+        <span class="stats-label">Academic GPA</span>
+        <h2 class="stats-value">{{ student().gpa | number:'1.2-2' }}</h2>
+      </div>
+    </div>
+    <!-- Course Summary Widget replacing duplicate cards -->
+    <app-course-summary-widget></app-course-summary-widget>
+  </section>
+
+
+  <!-- Two Column Layout: Main & Sidebar -->
+  <div class="dashboard-columns">
+    <!-- Active Courses Section -->
+    <main class="main-column">
+      <div class="section-header">
+        <h3 class="section-title">Enrolled Courses In-Progress</h3>
+        <a routerLink="/courses" class="section-link">View All</a>
+      </div>
+
+      <div class="courses-list" *ngIf="getEnrolledCourses().length > 0; else noEnrolled">
+        <div class="course-card-compact card-glass" *ngFor="let course of getEnrolledCourses()">
+          <div class="course-thumb">
+            <img [src]="course.image" [alt]="course.title" class="course-thumb-img">
+          </div>
+          <div class="course-details">
+            <div class="course-meta">
+              <span class="badge" [ngClass]="{
+                'badge-cs': course.category === 'Computer Science',
+                'badge-math': course.category === 'Mathematics',
+                'badge-design': course.category === 'Design',
+                'badge-business': course.category === 'Business'
+              }">{{ course.category }}</span>
+              <span class="credits-count">{{ course.credits }} Credits</span>
+            </div>
+            <h4 class="course-card-title">{{ course.title }}</h4>
+            <span class="course-instructor">By {{ course.instructor }}</span>
+            <div class="progress-wrapper">
+              <div class="progress-meta">
+                <span class="progress-text">Progress</span>
+                <span class="progress-value">{{ course.progress }}%</span>
+              </div>
+              <div class="progress-container">
+                <div class="progress-bar" [style.width.%]="course.progress"></div>
+              </div>
+            </div>
+          </div>
+          <div class="course-actions">
+            <button class="btn btn-secondary btn-icon-only" (click)="enrollmentService.resumeCourse(course.id)" title="Resume course study">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="action-icon"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <ng-template #noEnrolled>
+        <div class="empty-state card-glass">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+          <p class="empty-text">You are not enrolled in any courses right now.</p>
+          <a routerLink="/courses" class="btn btn-primary">Find a Course</a>
+        </div>
+      </ng-template>
+    </main>
+
+    <!-- Sidebar Announcements -->
+    <aside class="sidebar-column">
+      <div class="section-header">
+        <h3 class="section-title">Academic Notices</h3>
+      </div>
+      
+      <div class="notices-list">
+        <div class="notice-item card-glass">
+          <div class="notice-header">
+            <span class="notice-badge badge-warning">Important</span>
+            <span class="notice-date">Today</span>
+          </div>
+          <h4 class="notice-title">Fall Exam Registration</h4>
+          <p class="notice-desc">Registration portal closes next Friday. Verify course codes match your study plan before final submission.</p>
+        </div>
+
+        <div class="notice-item card-glass">
+          <div class="notice-header">
+            <span class="notice-badge badge-info">Workshop</span>
+            <span class="notice-date">2 days ago</span>
+          </div>
+          <h4 class="notice-title">Introduction to WebGPU</h4>
+          <p class="notice-desc">Join Dr. Sarah Jenkins this Thursday for a hands-on lab on modern rendering paradigms inside the browser.</p>
+        </div>
+
+        <div class="notice-item card-glass">
+          <div class="notice-header">
+            <span class="notice-badge badge-completed">General</span>
+            <span class="notice-date">1 week ago</span>
+          </div>
+          <h4 class="notice-title">Library System Upgrade</h4>
+          <p class="notice-desc">Access to the digital archives will be intermittently offline Sunday from 02:00 to 06:00 UTC due to kernel updates.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<ng-template #guestDashboard>
+  <div class="guest-container animate-fade-in">
+    <div class="guest-card card-glass">
+      <div class="lock-visual">
+        <div class="lock-glow"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lock-icon"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      
+      <h1 class="guest-title">Student Course Portal</h1>
+      <p class="guest-message">Welcome to the academic dashboard. Please sign in to view your personalized study progress, explore available syllabus directories, and manage your enrollment forms.</p>
+      
+      <div class="guest-actions">
+        <button class="btn btn-primary btn-lg" (click)="login()">Sign In as Alex Rivera</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
