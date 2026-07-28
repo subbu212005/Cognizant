@@ -1,0 +1,14 @@
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\bin\Debug\net10.0\GitLabTutorial.exe
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\bin\Debug\net10.0\GitLabTutorial.deps.json
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\bin\Debug\net10.0\GitLabTutorial.runtimeconfig.json
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\bin\Debug\net10.0\GitLabTutorial.dll
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\bin\Debug\net10.0\GitLabTutorial.pdb
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\obj\Debug\net10.0\GitLabTutorial.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\obj\Debug\net10.0\GitLabTutorial.AssemblyInfoInputs.cache
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\obj\Debug\net10.0\GitLabTutorial.AssemblyInfo.cs
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\obj\Debug\net10.0\GitLabTutorial.csproj.CoreCompileInputs.cache
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\obj\Debug\net10.0\GitLabTutorial.dll
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\obj\Debug\net10.0\refint\GitLabTutorial.dll
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\obj\Debug\net10.0\GitLabTutorial.pdb
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\obj\Debug\net10.0\GitLabTutorial.genruntimeconfig.cache
+C:\Users\subbu\Downloads\1. Git-HOL\GitLabTutorial\obj\Debug\net10.0\ref\GitLabTutorial.dll

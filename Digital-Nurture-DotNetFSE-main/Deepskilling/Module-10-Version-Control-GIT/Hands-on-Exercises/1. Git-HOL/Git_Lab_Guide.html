@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & Notepad++ Lab Guide - Interactive CMD Simulator</title>
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #131b2e;
+            --border-color: #223156;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #4f46e5;
+            --accent-glow: rgba(79, 70, 229, 0.4);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --terminal-cmd-bg: #0c0c0c;
+            --terminal-bash-bg: #1e1e2e;
+            --npp-bg: #ffffff;
+            --npp-text: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(circle at top right, #1e1b4b, var(--bg-primary) 60%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(10, 14, 23, 0.7);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .git-icon {
+            color: #f1502f;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .header-logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .meta-badge {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-badge span.highlight {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 75px);
+            overflow: hidden;
+        }
+
+        /* Sidebar steps column */
+        .sidebar {
+            width: 40%;
+            border-right: 1px solid var(--border-color);
+            background: rgba(19, 27, 46, 0.4);
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .section-card {
+            background: rgba(19, 27, 46, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-number {
+            background: var(--accent);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .step-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .step-item {
+            background: rgba(10, 14, 23, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .step-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .step-item.active {
+            border-color: var(--accent);
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .step-item.completed::after {
+            content: "✓";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .step-text {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
+            padding-right: 1.5rem;
+        }
+
+        .step-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            background: var(--bg-secondary);
+            color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn-run {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-run:hover {
+            background: var(--success);
+            color: #000;
+            border-color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Terminal & Simulation Display */
+        .workspace-view {
+            width: 60%;
+            background: #060913;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            gap: 1.5rem;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .selector-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-selector {
+            display: flex;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.25rem;
+            border-radius: 8px;
+        }
+
+        .selector-tab {
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .selector-tab.active {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* Windows Terminal Simulator */
+        .terminal-window {
+            flex: 1;
+            min-height: 400px;
+            background: var(--terminal-cmd-bg);
+            border: 1px solid #333333;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .terminal-window.bash-mode {
+            background: var(--terminal-bash-bg);
+            border-color: #3b3a4e;
+        }
+
+        .terminal-header {
+            background: #1c1c1c;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            border-bottom: 1px solid #2d2d2d;
+            height: 36px;
+        }
+
+        .terminal-window.bash-mode .terminal-header {
+            background: #181825;
+            border-bottom-color: #242436;
+        }
+
+        .terminal-tabs {
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+        }
+
+        .terminal-tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 12px;
+            background: #2b2b2b;
+            color: #c5c5c5;
+            font-size: 0.75rem;
+            height: 28px;
+            border-radius: 4px 4px 0 0;
+            margin-left: 8px;
+            cursor: pointer;
+            border: 1px solid #3c3c3c;
+            border-bottom: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .terminal-tab.active {
+            background: var(--terminal-cmd-bg);
+            color: #ffffff;
+            border-color: #333333;
+        }
+
+        .terminal-window.bash-mode .terminal-tab.active {
+            background: var(--terminal-bash-bg);
+            border-color: #3b3a4e;
+        }
+
+        .tab-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tab-icon-svg {
+            width: 14px;
+            height: 14px;
+            color: #cccccc;
+        }
+
+        .terminal-tab-add {
+            color: #aaaaaa;
+            font-size: 1.1rem;
+            padding: 0 10px;
+            cursor: pointer;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2px;
+            border-radius: 4px;
+        }
+
+        .terminal-tab-add:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .terminal-tab-dropdown {
+            color: #aaaaaa;
+            padding: 0 8px;
+            cursor: pointer;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2px;
+            border-radius: 4px;
+        }
+
+        .terminal-tab-dropdown:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .tab-close-btn {
+            font-size: 0.7rem;
+            color: #888888;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .tab-close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .window-controls {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .control-btn {
+            width: 46px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cccccc;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .control-btn.close:hover {
+            background: #e81123;
+            color: #ffffff;
+        }
+
+        .terminal-body {
+            flex: 1;
+            padding: 1.25rem;
+            font-family: 'Consolas', 'Cascadia Mono', 'Cascadia Code', monospace;
+            font-size: 1rem;
+            color: #cccccc;
+            overflow-y: auto;
+            line-height: 1.25;
+            position: relative;
+        }
+
+        .terminal-window.bash-mode .terminal-body {
+            color: #cdd6f4;
+        }
+
+        .terminal-line {
+            margin-bottom: 2px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .terminal-prompt {
+            color: #cccccc;
+            font-weight: normal;
+        }
+
+        .terminal-window.bash-mode .terminal-prompt {
+            color: #a6e3a1;
+            font-weight: bold;
+        }
+
+        .terminal-prompt-path {
+            color: #89b4fa;
+        }
+
+        .terminal-branch-badge {
+            color: #f9e2af;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            width: 70%;
+        }
+
+        .cursor {
+            background: #cccccc;
+            width: 8px;
+            height: 14px;
+            display: inline-block;
+            animation: blink 0.8s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Notepad++ Window Simulation */
+        .npp-overlay {
+            position: absolute;
+            top: 15%;
+            left: 10%;
+            width: 80%;
+            height: 70%;
+            background: var(--npp-bg);
+            color: var(--npp-text);
+            border: 2px solid #555;
+            border-radius: 6px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .npp-overlay.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .npp-header {
+            background: #f0f0f0;
+            border-bottom: 1px solid #ccc;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .npp-title-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .npp-menu-bar {
+            background: #e1e1e1;
+            padding: 0.25rem 1rem;
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            border-bottom: 1px solid #ccc;
+            user-select: none;
+        }
+
+        .npp-tab-bar {
+            background: #e8e8e8;
+            padding-left: 0.5rem;
+            display: flex;
+            border-bottom: 1px solid #bbb;
+        }
+
+        .npp-tab {
+            background: #fff;
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+            border: 1px solid #bbb;
+            border-bottom: none;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .npp-body {
+            flex: 1;
+            display: flex;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+        }
+
+        .npp-line-numbers {
+            background: #ececec;
+            color: #888;
+            padding: 0.5rem;
+            text-align: right;
+            user-select: none;
+            border-right: 1px solid #ddd;
+            width: 40px;
+        }
+
+        .npp-textarea {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.5rem;
+            resize: none;
+            font-family: inherit;
+            font-size: inherit;
+            color: #000;
+            background: #fff;
+        }
+
+        .npp-footer {
+            background: #f0f0f0;
+            border-top: 1px solid #ccc;
+            padding: 0.3rem 1rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        .btn-npp-save {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-npp-save:hover {
+            background: #4338ca;
+        }
+
+        /* Detailed explanation cards */
+        .info-panel {
+            background: rgba(19, 27, 46, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .info-panel-title {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-panel-body {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .info-panel-body code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            color: #a5b4fc;
+        }
+
+        .alert-hint {
+            border-left: 4px solid var(--warning);
+            background: rgba(245, 158, 11, 0.1);
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: #fef08a;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--success);
+            color: #000;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cmd-color-red { color: #ff5555; }
+        .cmd-color-green { color: #55ff55; }
+        .cmd-color-cyan { color: #55ffff; }
+        .cmd-color-yellow { color: #ffff55; }
+        .cmd-color-gray { color: #888888; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-logo">
+            <span class="git-icon">Git</span>
+            <h1>Lab Hands-on Guide</h1>
+        </div>
+        <div class="header-meta">
+            <div class="meta-badge">
+                OS: <span class="highlight">Windows (PowerShell/CMD)</span>
+            </div>
+            <div class="meta-badge">
+                Time: <span class="highlight">30 Minutes</span>
+            </div>
+            <div class="meta-badge">
+                Status: <span class="highlight" id="overall-status">0% Done</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar Navigation (Steps List) -->
+        <div class="sidebar">
+            
+            <!-- STEP 1 -->
+            <div class="section-card" id="card-sec-1">
+                <div class="section-header">
+                    <span class="section-title">
+                        <span class="section-number">1</span>
+                        Git Basic Setup
+                    </span>
+                </div>
+                <ul class="step-list">
+                    <li class="step-item" id="step-1" onclick="selectStep(1)">
+                        <div class="step-text">Verify Git client installation and view version.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 1)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'git --version')">📋 Copy</button>
+                        </div>
+                    </li>
+                    <li class="step-item" id="step-2" onclick="selectStep(2)">
+                        <div class="step-text">Configure global username & email address.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 2)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'git config --global user.name &quot;Subrahmanyeswara&quot; &amp;&amp; git config --global user.email &quot;yedula2005@gmail.com&quot;')">📋 Copy</button>
+                        </div>
+                    </li>
+                    <li class="step-item" id="step-3" onclick="selectStep(3)">
+                        <div class="step-text">Verify Git configurations are correctly set.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 3)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'git config --list')">📋 Copy</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="section-card" id="card-sec-2">
+                <div class="section-header">
+                    <span class="section-title">
+                        <span class="section-number">2</span>
+                        Editor Integration
+                    </span>
+                </div>
+                <ul class="step-list">
+                    <li class="step-item" id="step-4" onclick="selectStep(4)">
+                        <div class="step-text">Check if notepad++ can run from bash command line.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 4)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'notepad++')">📋 Copy</button>
+                        </div>
+                    </li>
+                    <li class="step-item" id="step-5" onclick="selectStep(5)">
+                        <div class="step-text">Make Notepad++ the default global editor for Git.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 5)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'git config --global core.editor &quot;notepad++&quot;')">📋 Copy</button>
+                        </div>
+                    </li>
+                    <li class="step-item" id="step-6" onclick="selectStep(6)">
+                        <div class="step-text">Verify integration by editing config globally.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 6)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'git config --global -e')">📋 Copy</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="section-card" id="card-sec-3">
+                <div class="section-header">
+                    <span class="section-title">
+                        <span class="section-number">3</span>
+                        Add & Track Files
+                    </span>
+                </div>
+                <ul class="step-list">
+                    <li class="step-item" id="step-7" onclick="selectStep(7)">
+                        <div class="step-text">Create and initialize repository folder "GitDemo".</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 7)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'mkdir GitDemo &amp;&amp; cd GitDemo &amp;&amp; git init')">📋 Copy</button>
+                        </div>
+                    </li>
+                    <li class="step-item" id="step-8" onclick="selectStep(8)">
+                        <div class="step-text">Create "welcome.txt" with sample content and verify.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 8)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'echo &quot;Welcome to Git&quot; &gt; welcome.txt &amp;&amp; cat welcome.txt')">📋 Copy</button>
+                        </div>
+                    </li>
+                    <li class="step-item" id="step-9" onclick="selectStep(9)">
+                        <div class="step-text">Check git status to see welcome.txt is untracked.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 9)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'git status')">📋 Copy</button>
+                        </div>
+                    </li>
+                    <li class="step-item" id="step-10" onclick="selectStep(10)">
+                        <div class="step-text">Track the file by adding it to staging area.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 10)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'git add welcome.txt')">📋 Copy</button>
+                        </div>
+                    </li>
+                    <li class="step-item" id="step-11" onclick="selectStep(11)">
+                        <div class="step-text">Commit using Notepad++ editor message.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 11)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'git commit')">📋 Copy</button>
+                        </div>
+                    </li>
+                    <li class="step-item" id="step-12" onclick="selectStep(12)">
+                        <div class="step-text">Link remote, pull and push local commits.</div>
+                        <div class="step-controls">
+                            <button class="btn btn-run" onclick="runCommandInline(event, 12)">▶ Run</button>
+                            <button class="btn" onclick="copyCommandText(event, 'git remote add origin https://gitlab.com/subbu/GitDemo.git &amp;&amp; git push origin master')">📋 Copy</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Terminal & Notepad++ View Area -->
+        <div class="workspace-view">
+            
+            <div class="selector-bar">
+                <div class="terminal-selector">
+                    <div class="selector-tab active" id="tab-cmd" onclick="setTerminalTheme('cmd')">Windows CMD</div>
+                    <div class="selector-tab" id="tab-bash" onclick="setTerminalTheme('bash')">Git Bash</div>
+                </div>
+                <div class="info-panel-title">
+                    <span id="current-step-display">Active Step: Step 1 (Verify Installation)</span>
+                </div>
+            </div>
+
+            <!-- Terminal Screen -->
+            <div class="terminal-window" id="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-tabs">
+                        <div class="terminal-tab active" id="term-tab-active">
+                            <span class="tab-icon">
+                                <svg class="tab-icon-svg" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5v7A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 14.5 3h-13ZM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7ZM4 6.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM4 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Z"/>
+                                </svg>
+                            </span>
+                            <span class="terminal-title" id="terminal-title">Command Prompt</span>
+                            <span class="tab-close-btn">✕</span>
+                        </div>
+                        <div class="terminal-tab-add">+</div>
+                        <div class="terminal-tab-dropdown">
+                            <svg viewBox="0 0 16 16" width="10" height="10" fill="currentColor">
+                                <path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="window-controls">
+                        <div class="control-btn">
+                            <svg viewBox="0 0 10 10" width="10" height="10" stroke="currentColor" stroke-width="1"><line x1="1" y1="9" x2="9" y2="9"/></svg>
+                        </div>
+                        <div class="control-btn">
+                            <svg viewBox="0 0 10 10" width="10" height="10" stroke="currentColor" stroke-width="1" fill="none"><rect x="1" y="1" width="8" height="8"/></svg>
+                        </div>
+                        <div class="control-btn close">
+                            <svg viewBox="0 0 10 10" width="10" height="10" stroke="currentColor" stroke-width="1"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+                    <div class="terminal-line">Microsoft Windows [Version 10.0.26200.8894]</div>
+                    <div class="terminal-line">(c) Microsoft Corporation. All rights reserved.</div>
+                    <div class="terminal-line"></div>
+                    <div id="terminal-output-log"></div>
+                    <div class="terminal-line" id="prompt-line">
+                        <span class="terminal-prompt" id="terminal-prompt-prefix">C:\Users\subbu\GitDemo&gt;</span><input class="terminal-input" id="terminal-input" readonly><span class="cursor" id="terminal-cursor"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notepad++ Overlay -->
+            <div class="npp-overlay" id="npp-window">
+                <div class="npp-header">
+                    <div class="npp-title-bar">
+                        📄 <span id="npp-filename">.gitconfig - Notepad++</span>
+                    </div>
+                    <div style="display: flex; height: 100%; align-items: center;">
+                        <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #333;" onclick="closeNpp()">
+                            <svg viewBox="0 0 10 10" width="10" height="10" stroke="currentColor" stroke-width="1.5"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="npp-menu-bar">
+                    <span>File</span><span>Edit</span><span>Search</span><span>View</span><span>Encoding</span><span>Language</span><span>Settings</span><span>Tools</span><span>Macro</span><span>Run</span><span>Plugins</span><span>Window</span>
+                </div>
+                <div class="npp-tab-bar">
+                    <div class="npp-tab">
+                        <span id="npp-tab-title">.gitconfig</span> ✕
+                    </div>
+                </div>
+                <div class="npp-body">
+                    <div class="npp-line-numbers" id="npp-lines">
+                        1<br>2<br>3<br>4<br>5<br>6
+                    </div>
+                    <textarea class="npp-textarea" id="npp-text-content" spellcheck="false"></textarea>
+                </div>
+                <div class="npp-footer">
+                    <button class="btn-npp-save" onclick="saveNpp()">Save & Close (Commit)</button>
+                </div>
+            </div>
+
+            <!-- Explanation & Verification Box -->
+            <div class="info-panel">
+                <div class="info-panel-title">💡 Explanation & Git Best Practices</div>
+                <div class="info-panel-body" id="step-explanation">
+                    Select a step from the checklist on the left, or press the <strong>▶ Run</strong> button to run the step interactively in the simulated command prompt window.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <span>✓</span> <span id="toast-message">Command completed successfully!</span>
+    </div>
+
+    <!-- Interactive Simulator JS Logic -->
+    <script>
+        let currentStep = 1;
+        let completedSteps = new Set();
+        let terminalTheme = 'cmd';
+        let isTyping = false;
+        let isNppOpen = false;
+        let isGitDemoDir = true;
+        let isGitInit = false;
+        let nppCallback = null;
+
+        // Commands registry database with custom outputs in Windows CMD and Git Bash formats
+        const commandRegistry = {
+            1: {
+                cmd: "git --version",
+                bash: "git --version",
+                outputCmd: "git version 2.53.0.windows.1",
+                outputBash: "git version 2.53.0.windows.1",
+                explanation: "Checks if the Git command-line client is installed. The output displays the installed Git version."
+            },
+            2: {
+                cmd: 'git config --global user.name "Subrahmanyeswara" && git config --global user.email "yedula2005@gmail.com"',
+                bash: 'git config --global user.name "Subrahmanyeswara" && git config --global user.email "yedula2005@gmail.com"',
+                outputCmd: "",
+                outputBash: "",
+                explanation: "Sets the global name and email configurations. These credentials will label your commits so others know who authored the changes."
+            },
+            3: {
+                cmd: "git config --list",
+                bash: "git config --list",
+                outputCmd: "diff.astextplain.textconv=astextplain\ncore.autocrlf=true\ncore.editor=notepad++\nuser.name=Subrahmanyeswara\nuser.email=yedula2005@gmail.com\ninit.defaultbranch=master",
+                outputBash: "diff.astextplain.textconv=astextplain\ncore.autocrlf=true\ncore.editor=notepad++\nuser.name=Subrahmanyeswara\nuser.email=yedula2005@gmail.com\ninit.defaultbranch=master",
+                explanation: "Lists all current configurations loaded from systemic, user, and repository levels. Confirm your name, email, and default core editor (notepad++) are set."
+            },
+            4: {
+                cmd: "notepad++",
+                bash: "notepad++",
+                outputCmd: "[Launching Notepad++ editor environment...]",
+                outputBash: "[Launching Notepad++ editor environment...]",
+                explanation: "Attempts to start Notepad++ from the terminal. If Notepad++ does not open, make sure its installation folder is added to your system's PATH variable."
+            },
+            5: {
+                cmd: 'git config --global core.editor "notepad++"',
+                bash: 'git config --global core.editor "notepad++"',
+                outputCmd: "",
+                outputBash: "",
+                explanation: "Configures Git to default to Notepad++ whenever it needs you to edit text, like typing descriptive multiline commit messages."
+            },
+            6: {
+                cmd: "git config --global -e",
+                bash: "git config --global -e",
+                outputCmd: "[Opening global configuration file `.gitconfig` in Notepad++...]",
+                outputBash: "[Opening global configuration file `.gitconfig` in Notepad++...]",
+                explanation: "Opens the global config file directly inside Notepad++. This allows you to verify that the editor config was successfully linked."
+            },
+            7: {
+                cmd: "mkdir GitDemo && cd GitDemo && git init",
+                bash: "mkdir GitDemo && cd GitDemo && git init",
+                outputCmd: "Initialized empty Git repository in C:/Users/subbu/GitDemo/.git/",
+                outputBash: "Initialized empty Git repository in C:/Users/subbu/GitDemo/.git/",
+                explanation: "Creates a new folder <code>GitDemo</code>, moves into it, and initializes a Git tracking repository database. Note the created hidden folder <code>.git</code>."
+            },
+            8: {
+                cmd: 'echo "Welcome to Git" > welcome.txt && type welcome.txt',
+                bash: 'echo "Welcome to Git" > welcome.txt && cat welcome.txt',
+                outputCmd: "Welcome to Git",
+                outputBash: "Welcome to Git",
+                explanation: "Creates a plain text file named <code>welcome.txt</code> containing the text 'Welcome to Git', and reads it back."
+            },
+            9: {
+                cmd: "git status",
+                bash: "git status",
+                outputCmd: "On branch master\n\nNo commits yet\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t<span class='cmd-color-red'>welcome.txt</span>\n\nnothing added to commit but untracked files present (use \"git add\" to track)",
+                outputBash: "On branch master\n\nNo commits yet\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t<span class='cmd-color-red'>welcome.txt</span>\n\nnothing added to commit but untracked files present (use \"git add\" to track)",
+                explanation: "Inspects your repository's working status. Files highlighted in <span class='cmd-color-red'>red</span> are untracked by Git, meaning they won't be saved in commits."
+            },
+            10: {
+                cmd: "git add welcome.txt",
+                bash: "git add welcome.txt",
+                outputCmd: "warning: in the working copy of 'welcome.txt', LF will be replaced by CRLF the next time Git touches it",
+                outputBash: "warning: in the working copy of 'welcome.txt', LF will be replaced by CRLF the next time Git touches it",
+                explanation: "Adds <code>welcome.txt</code> to the Git staging index. Staged changes are selected to be saved in the upcoming commit."
+            },
+            11: {
+                cmd: "git commit",
+                bash: "git commit",
+                outputCmd: "[Opening Notepad++ to edit commit comments...]",
+                outputBash: "[Opening Notepad++ to edit commit comments...]",
+                explanation: "Triggers a commit. Because we did not specify the inline <code>-m</code> flag, Git launches Notepad++ so you can write a comprehensive, multiline commit message."
+            },
+            12: {
+                cmd: "git remote add origin https://gitlab.com/subbu/GitDemo.git && git push origin master",
+                bash: "git remote add origin https://gitlab.com/subbu/GitDemo.git && git push origin master",
+                outputCmd: "Enumerating objects: 3, done.\nCounting objects: 100% (3/3), done.\nWriting objects: 100% (3/3), 282 bytes | 282.00 KiB/s, done.\nTotal 3 (delta 0), reused 0 (delta 0), pack-reused 0\nTo https://gitlab.com/subbu/GitDemo.git\n * [new branch]      master -> master",
+                outputBash: "Enumerating objects: 3, done.\nCounting objects: 100% (3/3), done.\nWriting objects: 100% (3/3), 282 bytes | 282.00 KiB/s, done.\nTotal 3 (delta 0), reused 0 (delta 0), pack-reused 0\nTo https://gitlab.com/subbu/GitDemo.git\n * [new branch]      master -> master",
+                explanation: "Associates your local branch with a remote repository hosting URL on GitLab and uploads (pushes) your history."
+            }
+        };
+
+        // Initialize display
+        selectStep(1);
+
+        function selectStep(stepNum) {
+            if (isTyping || isNppOpen) return;
+            currentStep = stepNum;
+
+            // Highlight in list
+            document.querySelectorAll('.step-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step-${stepNum}`).classList.add('active');
+
+            // Set explanation text
+            const explanationDiv = document.getElementById('step-explanation');
+            explanationDiv.innerHTML = commandRegistry[stepNum].explanation;
+
+            document.getElementById('current-step-display').innerText = `Active Step: Step ${stepNum}`;
+        }
+
+        function setTerminalTheme(theme) {
+            terminalTheme = theme;
+            const term = document.getElementById('terminal');
+            const title = document.getElementById('terminal-title');
+            const promptPref = document.getElementById('terminal-prompt-prefix');
+            const tabs = document.querySelectorAll('.selector-tab');
+
+            tabs.forEach(t => t.classList.remove('active'));
+
+            if (theme === 'cmd') {
+                term.classList.remove('bash-mode');
+                title.innerText = "Command Prompt";
+                document.getElementById('tab-cmd').classList.add('active');
+                updatePromptText();
+            } else {
+                term.classList.add('bash-mode');
+                title.innerText = "Git Bash";
+                document.getElementById('tab-bash').classList.add('active');
+                updatePromptText();
+            }
+        }
+
+        function updatePromptText() {
+            const promptPref = document.getElementById('terminal-prompt-prefix');
+            let pathPart = isGitDemoDir ? "C:\\Users\\subbu\\GitDemo" : "C:\\Users\\subbu";
+            
+            if (terminalTheme === 'cmd') {
+                promptPref.innerHTML = `${pathPart}&gt;`;
+            } else {
+                let bashPath = pathPart.replace(/\\/g, '/').replace('C:', '/c');
+                let branchStr = isGitInit ? " <span class='terminal-branch-badge'>(master)</span>" : "";
+                promptPref.innerHTML = `<span class='cmd-color-green'>subbu@DESKTOP-5F8KL</span> <span class='cmd-color-yellow'>MINGW64</span> <span class='terminal-prompt-path'>${bashPath}</span>${branchStr}<br>$ `;
+            }
+        }
+
+        function copyCommandText(event, text) {
+            event.stopPropagation();
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("Command copied to clipboard!");
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.add('active');
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 2500);
+        }
+
+        function runCommandInline(event, stepNum) {
+            if (event) event.stopPropagation();
+            if (isTyping || isNppOpen) return;
+
+            selectStep(stepNum);
+            
+            const registry = commandRegistry[stepNum];
+            const rawCommand = terminalTheme === 'cmd' ? registry.cmd : registry.bash;
+
+            const inputField = document.getElementById('terminal-input');
+            const outputLog = document.getElementById('terminal-output-log');
+            const promptLine = document.getElementById('prompt-line');
+            const terminalBody = document.getElementById('terminal-body');
+
+            isTyping = true;
+            inputField.value = "";
+            promptLine.style.display = "flex";
+
+            let i = 0;
+            const typingInterval = setInterval(() => {
+                if (i < rawCommand.length) {
+                    inputField.value += rawCommand.charAt(i);
+                    i++;
+                    terminalBody.scrollTop = terminalBody.scrollHeight;
+                } else {
+                    clearInterval(typingInterval);
+                    setTimeout(() => {
+                        executeCommandAction(stepNum);
+                    }, 400);
+                }
+            }, 30);
+        }
+
+        function executeCommandAction(stepNum) {
+            const registry = commandRegistry[stepNum];
+            const outputLog = document.getElementById('terminal-output-log');
+            const inputField = document.getElementById('terminal-input');
+            const promptLine = document.getElementById('prompt-line');
+            const terminalBody = document.getElementById('terminal-body');
+
+            // Log command into history
+            const cmdHistoryLine = document.createElement('div');
+            cmdHistoryLine.className = 'terminal-line';
+            
+            let pathPart = isGitDemoDir ? "C:\\Users\\subbu\\GitDemo" : "C:\\Users\\subbu";
+            if (terminalTheme === 'cmd') {
+                cmdHistoryLine.innerHTML = `<span class="terminal-prompt">${pathPart}&gt;</span>${inputField.value}`;
+            } else {
+                let bashPath = pathPart.replace(/\\/g, '/').replace('C:', '/c');
+                let branchStr = isGitInit ? " <span class='terminal-branch-badge'>(master)</span>" : "";
+                cmdHistoryLine.innerHTML = `<span class='cmd-color-green'>subbu@DESKTOP-5F8KL</span> <span class='cmd-color-yellow'>MINGW64</span> <span class='terminal-prompt-path'>${bashPath}</span>${branchStr}<br>$ ${inputField.value}`;
+            }
+            outputLog.appendChild(cmdHistoryLine);
+
+            // Execute local adjustments to state
+            if (stepNum === 7) {
+                isGitDemoDir = true;
+                isGitInit = true;
+            }
+
+            // Check if Command is Notepad++ or Git Editor launch
+            if (stepNum === 4) {
+                openNpp("New Document.txt", "Welcome to Notepad++!\nEnvironment variable config is verified successfully.\nYou can close this editor to return to CMD.", () => {
+                    postTerminalOutput(registry);
+                });
+            } else if (stepNum === 6) {
+                openNpp(".gitconfig", "[diff \"astextplain\"]\n\ttextconv = astextplain\n[filter \"lfs\"]\n\tclean = git-lfs clean -- %f\n\tsmudge = git-lfs smudge -- %f\n\tprocess = git-lfs filter-process\n\trequired = true\n[core]\n\tautocrlf = true\n\teditor = notepad++\n[user]\n\tname = Subrahmanyeswara\n\temail = yedula2005@gmail.com", () => {
+                    postTerminalOutput(registry);
+                });
+            } else if (stepNum === 11) {
+                openNpp("COMMIT_EDITMSG", "\n# Please enter the commit message for your changes. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n#\n# On branch master\n# Initial commit\n#\n# Changes to be committed:\n#\tnew file:   welcome.txt\n#", (text) => {
+                    let commitMsg = text.split('\n')[0] || "Update welcome.txt";
+                    const customCommitOutput = `[master (root-commit) c8094f8] ${commitMsg}\n 1 file changed, 2 insertions(+)\n create mode 100644 welcome.txt`;
+                    
+                    const simulatedRegistry = {
+                        outputCmd: customCommitOutput,
+                        outputBash: customCommitOutput
+                    };
+                    postTerminalOutput(simulatedRegistry);
+                });
+            } else {
+                postTerminalOutput(registry);
+            }
+        }
+
+        function postTerminalOutput(registry) {
+            const outputLog = document.getElementById('terminal-output-log');
+            const inputField = document.getElementById('terminal-input');
+            const terminalBody = document.getElementById('terminal-body');
+
+            const outText = terminalTheme === 'cmd' ? registry.outputCmd : registry.outputBash;
+            
+            if (outText) {
+                const outputLine = document.createElement('div');
+                outputLine.className = 'terminal-line';
+                outputLine.innerHTML = outText.replace(/\n/g, '<br>');
+                outputLog.appendChild(outputLine);
+            }
+
+            inputField.value = "";
+            updatePromptText();
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+            isTyping = false;
+
+            // Complete Step
+            completedSteps.add(currentStep);
+            document.getElementById(`step-${currentStep}`).classList.add('completed');
+            
+            // Check if section completed
+            updateSectionStats();
+            showToast(`Step ${currentStep} completed successfully!`);
+
+            // Progress to next step automatically
+            if (currentStep < 12) {
+                setTimeout(() => {
+                    selectStep(currentStep + 1);
+                }, 1000);
+            }
+        }
+
+        function updateSectionStats() {
+            const pct = Math.round((completedSteps.size / 12) * 100);
+            document.getElementById('overall-status').innerText = `${pct}% Done`;
+
+            // Check step 1-3
+            let sec1Done = [1, 2, 3].every(s => completedSteps.has(s));
+            if (sec1Done) document.getElementById('card-sec-1').style.borderColor = 'var(--success)';
+
+            // Check step 4-6
+            let sec2Done = [4, 5, 6].every(s => completedSteps.has(s));
+            if (sec2Done) document.getElementById('card-sec-2').style.borderColor = 'var(--success)';
+
+            // Check step 7-12
+            let sec3Done = [7, 8, 9, 10, 11, 12].every(s => completedSteps.has(s));
+            if (sec3Done) document.getElementById('card-sec-3').style.borderColor = 'var(--success)';
+        }
+
+        // Notepad++ Windows Management
+        function openNpp(filename, content, callback) {
+            isNppOpen = true;
+            document.getElementById('npp-filename').innerText = `${filename} - Notepad++`;
+            document.getElementById('npp-tab-title').innerText = filename;
+            
+            const txt = document.getElementById('npp-text-content');
+            txt.value = content;
+            
+            const lineContainer = document.getElementById('npp-lines');
+            updateLineNumbers(content, lineContainer);
+
+            // Textarea line-count handler
+            txt.oninput = () => {
+                updateLineNumbers(txt.value, lineContainer);
+            };
+
+            nppCallback = callback;
+            document.getElementById('npp-window').classList.add('active');
+        }
+
+        function updateLineNumbers(content, container) {
+            const lines = content.split('\n').length;
+            let linesHtml = "";
+            for (let i = 1; i <= Math.max(lines, 6); i++) {
+                linesHtml += `${i}<br>`;
+            }
+            container.innerHTML = linesHtml;
+        }
+
+        function saveNpp() {
+            if (!isNppOpen) return;
+            const content = document.getElementById('npp-text-content').value;
+            closeNpp();
+            if (nppCallback) {
+                nppCallback(content);
+            }
+        }
+
+        function closeNpp() {
+            isNppOpen = false;
+            document.getElementById('npp-window').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
