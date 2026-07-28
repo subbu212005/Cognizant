@@ -2,7 +2,7 @@
 
 Welcome to the **Containerization Using Docker** learning module! This comprehensive module is designed to take you from a Docker beginner to a confident practitioner capable of containerizing applications, configuring complex environments, managing persistent storage, designing custom networks, and understanding the basics of container orchestration.
 
-## 📌 Course Outline & Syllabus
+##  Course Outline & Syllabus
 
 This module is divided into 8 focused sub-modules and a resource toolkit:
 
@@ -25,7 +25,7 @@ This module is divided into 8 focused sub-modules and a resource toolkit:
 
 ---
 
-## 🛠️ Prerequisites & Local Setup
+##  Prerequisites & Local Setup
 
 To follow along with the exercises and guides in this module, you need Docker installed on your development machine.
 
@@ -53,7 +53,7 @@ docker run hello-world
 
 ---
 
-## 📚 Resources Toolkit
+##  Resources Toolkit
 Keep these references handy as you work through the guides:
 * **[Docker Cheat Sheet](file:///c:/Users/subbu/Downloads/Module-12-Containerization-Using-Docker/Resources/Docker-Cheat-Sheet.md)**: A quick table of day-to-day command snippets.
 * **[Docker Commands Reference](file:///c:/Users/subbu/Downloads/Module-12-Containerization-Using-Docker/Resources/Docker-Commands-Reference.md)**: Comprehensive reference explaining syntax, options, and behaviors.
