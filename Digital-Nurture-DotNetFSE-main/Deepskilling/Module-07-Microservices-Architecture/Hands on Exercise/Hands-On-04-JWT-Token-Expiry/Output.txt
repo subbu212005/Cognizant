@@ -1,0 +1,40 @@
+JWT Expiry Validation Verification Output
+==========================================
+
+1. Requesting valid token...
+POST http://127.0.0.1:5035/api/auth/login
+Payload: {"Username": "JohnDoe"}
+Response Status: 200 OK
+Response JSON:
+{
+  "Token": "[VALID_JWT_TOKEN]"
+}
+
+2. Calling protected endpoint with valid token...
+GET http://127.0.0.1:5035/api/protected/data
+Header: Authorization: Bearer [VALID_JWT_TOKEN]
+Response Status: 200 OK
+Response JSON:
+{
+  "message": "This is secure data. Access granted!"
+}
+
+3. Requesting expired token (expired 5 minutes ago)...
+POST http://127.0.0.1:5035/api/auth/login?expired=true
+Payload: {"Username": "JohnDoe"}
+Response Status: 200 OK
+Response JSON:
+{
+  "Token": "[EXPIRED_JWT_TOKEN]"
+}
+
+4. Calling protected endpoint with expired token...
+GET http://127.0.0.1:5035/api/protected/data
+Header: Authorization: Bearer [EXPIRED_JWT_TOKEN]
+Response Status: 401 Unauthorized
+Response Headers:
+- Token-Expired: true
+- Cache-Control: no-cache, no-store, must-revalidate
+- Pragma: no-cache
+- Transfer-Encoding: chunked
+- Server: Kestrel
