@@ -1,2 +1,0 @@
-Welcome to Git. This is a hands-on lab exercise.
-Let's learn how to track and commit files.
