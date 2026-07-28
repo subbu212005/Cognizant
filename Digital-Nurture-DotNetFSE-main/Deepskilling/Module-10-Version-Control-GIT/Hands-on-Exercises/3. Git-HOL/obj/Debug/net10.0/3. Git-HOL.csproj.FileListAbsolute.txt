@@ -1,0 +1,14 @@
+C:\Users\subbu\Downloads\3. Git-HOL\bin\Debug\net10.0\3. Git-HOL.exe
+C:\Users\subbu\Downloads\3. Git-HOL\bin\Debug\net10.0\3. Git-HOL.deps.json
+C:\Users\subbu\Downloads\3. Git-HOL\bin\Debug\net10.0\3. Git-HOL.runtimeconfig.json
+C:\Users\subbu\Downloads\3. Git-HOL\bin\Debug\net10.0\3. Git-HOL.dll
+C:\Users\subbu\Downloads\3. Git-HOL\bin\Debug\net10.0\3. Git-HOL.pdb
+C:\Users\subbu\Downloads\3. Git-HOL\obj\Debug\net10.0\3. Git-HOL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\subbu\Downloads\3. Git-HOL\obj\Debug\net10.0\3. Git-HOL.AssemblyInfoInputs.cache
+C:\Users\subbu\Downloads\3. Git-HOL\obj\Debug\net10.0\3. Git-HOL.AssemblyInfo.cs
+C:\Users\subbu\Downloads\3. Git-HOL\obj\Debug\net10.0\3. Git-HOL.csproj.CoreCompileInputs.cache
+C:\Users\subbu\Downloads\3. Git-HOL\obj\Debug\net10.0\3. Git-HOL.dll
+C:\Users\subbu\Downloads\3. Git-HOL\obj\Debug\net10.0\refint\3. Git-HOL.dll
+C:\Users\subbu\Downloads\3. Git-HOL\obj\Debug\net10.0\3. Git-HOL.pdb
+C:\Users\subbu\Downloads\3. Git-HOL\obj\Debug\net10.0\3. Git-HOL.genruntimeconfig.cache
+C:\Users\subbu\Downloads\3. Git-HOL\obj\Debug\net10.0\ref\3. Git-HOL.dll
