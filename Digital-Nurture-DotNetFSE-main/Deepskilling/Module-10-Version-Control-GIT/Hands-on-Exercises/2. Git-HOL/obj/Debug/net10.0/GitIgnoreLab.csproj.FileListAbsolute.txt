@@ -1,0 +1,14 @@
+C:\Users\subbu\Downloads\2. Git-HOL\bin\Debug\net10.0\GitIgnoreLab.exe
+C:\Users\subbu\Downloads\2. Git-HOL\bin\Debug\net10.0\GitIgnoreLab.deps.json
+C:\Users\subbu\Downloads\2. Git-HOL\bin\Debug\net10.0\GitIgnoreLab.runtimeconfig.json
+C:\Users\subbu\Downloads\2. Git-HOL\bin\Debug\net10.0\GitIgnoreLab.dll
+C:\Users\subbu\Downloads\2. Git-HOL\bin\Debug\net10.0\GitIgnoreLab.pdb
+C:\Users\subbu\Downloads\2. Git-HOL\obj\Debug\net10.0\GitIgnoreLab.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\subbu\Downloads\2. Git-HOL\obj\Debug\net10.0\GitIgnoreLab.AssemblyInfoInputs.cache
+C:\Users\subbu\Downloads\2. Git-HOL\obj\Debug\net10.0\GitIgnoreLab.AssemblyInfo.cs
+C:\Users\subbu\Downloads\2. Git-HOL\obj\Debug\net10.0\GitIgnoreLab.csproj.CoreCompileInputs.cache
+C:\Users\subbu\Downloads\2. Git-HOL\obj\Debug\net10.0\GitIgnoreLab.dll
+C:\Users\subbu\Downloads\2. Git-HOL\obj\Debug\net10.0\refint\GitIgnoreLab.dll
+C:\Users\subbu\Downloads\2. Git-HOL\obj\Debug\net10.0\GitIgnoreLab.pdb
+C:\Users\subbu\Downloads\2. Git-HOL\obj\Debug\net10.0\GitIgnoreLab.genruntimeconfig.cache
+C:\Users\subbu\Downloads\2. Git-HOL\obj\Debug\net10.0\ref\GitIgnoreLab.dll
