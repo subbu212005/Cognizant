@@ -1,0 +1,25 @@
+--- Test 1: Invalid Login ---
+Request: POST http://localhost:5272/api/auth/login
+Payload: {"username": "admin", "password": "wrongpassword"}
+Response:
+Status Code: 401 Unauthorized
+Response Body: {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.2","title":"Unauthorized","status":401,"traceId":"00-75f8d189dc6b9deb71dd89e8b715bde3-15e891e28d1d792f-00"}
+
+--- Test 2: Valid Login ---
+Request: POST http://localhost:5272/api/auth/login
+Payload: {"username": "admin", "password": "password123"}
+Response:
+Status Code: 200 OK
+Response Body: {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJleHAiOjE3ODUyNTE5NTgsImlzcyI6Ik15QXV0aFNlcnZlciIsImF1ZCI6Ik15QXBpVXNlcnMifQ.xUXV2ljdA0wHyUeXiQRy4kgMYrxLg3zHtDBqcE8HSis"}
+
+--- Test 3: Protected Endpoint without Token ---
+Request: GET http://localhost:5272/api/secure
+Response:
+Status Code: 401 Unauthorized
+
+--- Test 4: Protected Endpoint with Token ---
+Request: GET http://localhost:5272/api/secure
+Headers: Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJleHAiOjE3ODUyNTE5NTgsImlzcyI6Ik15QXV0aFNlcnZlciIsImF1ZCI6Ik15QXBpVXNlcnMifQ.xUXV2ljdA0wHyUeXiQRy4kgMYrxLg3zHtDBqcE8HSis
+Response:
+Status Code: 200 OK
+Response Body: {"message":"This is a secure endpoint. Access granted!","authorizedUser":"admin","timestamp":"2026-07-28T14:19:19.3184612Z"}
