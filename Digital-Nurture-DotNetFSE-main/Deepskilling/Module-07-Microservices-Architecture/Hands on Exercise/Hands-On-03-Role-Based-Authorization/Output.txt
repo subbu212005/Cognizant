@@ -1,0 +1,62 @@
+================================================================================
+VERIFICATION OF ROLE-BASED AUTHORIZATION API
+================================================================================
+
+1. Hitting the Protected Admin Dashboard Endpoint Without a JWT Token
+--------------------------------------------------------------------------------
+Command:
+curl.exe -i http://localhost:5256/api/admin/dashboard
+
+Output:
+HTTP/1.1 401 Unauthorized
+Content-Length: 0
+Date: Tue, 28 Jul 2026 14:52:24 GMT
+Server: Kestrel
+WWW-Authenticate: Bearer
+
+
+2. Authenticating as a Normal User ("Alice" with role "User")
+--------------------------------------------------------------------------------
+Command:
+$body = @{ Username = 'Alice'; Role = 'User' } | ConvertTo-Json
+Invoke-RestMethod -Uri 'http://localhost:5256/api/auth/login' -Method Post -Body $body -ContentType 'application/json'
+
+Output Token:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQWxpY2UiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzg1MjU0MDIyLCJpc3MiOiJSb2xlQmFzZWRBdXRoQVBJIiwiYXVkIjoiUm9sZUJhc2VkQXV0aEFQSSJ9.8rnAOC6zrS9KykG6O1B-r_KUbjwamrvTGprnlxzjtrU
+
+
+3. Hitting the Admin Dashboard Endpoint with the User Token
+--------------------------------------------------------------------------------
+Command:
+curl.exe -i -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQWxpY2UiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzg1MjU0MDIyLCJpc3MiOiJSb2xlQmFzZWRBdXRoQVBJIiwiYXVkIjoiUm9sZUJhc2VkQXV0aEFQSSJ9.8rnAOC6zrS9KykG6O1B-r_KUbjwamrvTGprnlxzjtrU" http://localhost:5256/api/admin/dashboard
+
+Output:
+HTTP/1.1 403 Forbidden
+Content-Length: 0
+Date: Tue, 28 Jul 2026 14:53:53 GMT
+Server: Kestrel
+
+
+4. Authenticating as an Admin ("Bob" with role "Admin")
+--------------------------------------------------------------------------------
+Command:
+$body = @{ Username = 'Bob'; Role = 'Admin' } | ConvertTo-Json
+Invoke-RestMethod -Uri 'http://localhost:5256/api/auth/login' -Method Post -Body $body -ContentType 'application/json'
+
+Output Token:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQm9iIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3ODUyNTQwNDAsImlzcyI6IlJvbGVCYXNlZEF1dGhBUEkiLCJhdWQiOiJSb2xlQmFzZWRBdXRoQVBJIn0.Z7L7ujjDNP_q5Segt4wn74w4oo2yHjtTTGQSLZujtLU
+
+
+5. Hitting the Admin Dashboard Endpoint with the Admin Token
+--------------------------------------------------------------------------------
+Command:
+curl.exe -i -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQm9iIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3ODUyNTQwNDAsImlzcyI6IlJvbGVCYXNlZEF1dGhBUEkiLCJhdWQiOiJSb2xlQmFzZWRBdXRoQVBJIn0.Z7L7ujjDNP_q5Segt4wn74w4oo2yHjtTTGQSLZujtLU" http://localhost:5256/api/admin/dashboard
+
+Output:
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=utf-8
+Date: Tue, 28 Jul 2026 14:54:05 GMT
+Server: Kestrel
+Transfer-Encoding: chunked
+
+Welcome to the admin dashboard.
