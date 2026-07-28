@@ -6,7 +6,7 @@ By the end of this module, you will understand how modern software engineering t
 
 ---
 
-## 🗺️ Module Roadmap & Structure
+##  Module Roadmap & Structure
 
 This module is structured into three main chapters, accompanied by practical resources and cheat sheets:
 
@@ -36,7 +36,7 @@ graph TD
     style E fill:#10B981,stroke:#047857,stroke-width:1px,color:#fff
 ```
 
-### 📁 Directory Layout
+### Directory Layout
 
 ```text
 Module-11-DevOps-and-CICD/
@@ -64,7 +64,7 @@ Module-11-DevOps-and-CICD/
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 After completing this module, you will be able to:
 
@@ -77,7 +77,7 @@ After completing this module, you will be able to:
 
 ---
 
-## ⚙️ Prerequisites
+##  Prerequisites
 
 To get the most out of this module, you should have:
 * **Basic Git/GitHub Knowledge**: Understanding commits, branching, merging, and pull requests.
@@ -87,7 +87,7 @@ To get the most out of this module, you should have:
 
 ---
 
-## 📚 Study Recommendations
+## Study Recommendations
 
 1. **Step-by-Step Approach**: Start with [Chapter 1 Notes](file:///c:/Users/subbu/Downloads/Module-11-DevOps-and-CICD/01-Introduction-to-DevOps/Notes.md) to understand the *why* of DevOps before moving to the *how* in Chapters 2 and 3.
 2. **Hands-on Practice**: Follow along with the YAML pipeline structures provided in [Chapter 3 Notes](file:///c:/Users/subbu/Downloads/Module-11-DevOps-and-CICD/03-CI-CD-Tools-and-Platforms/Notes.md) and [CI/CD Cheat Sheet](file:///c:/Users/subbu/Downloads/Module-11-DevOps-and-CICD/Resources/CI-CD-Cheat-Sheet.md).
